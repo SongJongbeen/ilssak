@@ -6,7 +6,7 @@ const sendResponse = require("./src/chat/send-response.js");
 
 require("dotenv").config({ path: ".env" })
 
-streamerName = "해모수보컬";
+streamerName = "금성경";
 
 buzzk.login(process.env.NID_AUT, process.env.NID_SES); //로그인
 
@@ -14,7 +14,7 @@ const buzzkChat = buzzk.chat;
 
 async function test (streamerName) {
 
-    let isActive = false; //활성화 여부
+    let isActive = true; //활성화 여부
 
     let chSearch = await buzzk.channel.search(streamerName); //채널 검색
     
@@ -43,7 +43,7 @@ async function test (streamerName) {
             }
 
             if (isActive) {
-                if (streamerName === "일급천재") {
+                if (streamerName === "금성경") {
                     runCelestial(data, o, chat);
                 }
     
