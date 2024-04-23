@@ -6,7 +6,7 @@ const sendResponse = require("./src/chat/send-response.js");
 
 require("dotenv").config({ path: ".env" })
 
-streamerName = "금성경";
+streamerName = "금성경";    // 테스트중
 
 buzzk.login(process.env.NID_AUT, process.env.NID_SES); //로그인
 
@@ -14,7 +14,7 @@ const buzzkChat = buzzk.chat;
 
 async function test (streamerName) {
 
-    let isActive = true; //활성화 여부
+    let isActive = false; //활성화 여부
 
     let chSearch = await buzzk.channel.search(streamerName); //채널 검색
     
@@ -33,17 +33,22 @@ async function test (streamerName) {
             console.log(data[o].message);
 
             if (data[o].message === "!on") {
-                isActive = true;
-                chat.send("일싹이가 깨어났습니다!");
+                if (data[o].author.name === "금성경" || data[o].author.name === "일급천재" || data[o].author.name === "해모수보컬") {
+                    isActive = true;
+                    chat.send("일싹이가 깨어났습니다!");
+                } else { chat.send("일싹이를 깨울 권한이 없습니다"); }
             }
 
             if (data[o].message === "!off") {
-                isActive = false;
-                chat.send("일싹이 자러갈게~");
+                if (data[o].author.name === "금성경" || data[o].author.name === "일급천재" || data[o].author.name === "해모수보컬") {
+                    isActive = false;
+                    chat.send("일싹이 자러갈게~");
+                } else { chat.send("일싹이를 재울 권한이 없습니다"); }
             }
 
             if (isActive) {
-                if (streamerName === "금성경") {
+                if (streamerName === "금성경") {    // 테스트중
+                // if (streamerName === "일급천재") {
                     runCelestial(data, o, chat);
                 }
     
