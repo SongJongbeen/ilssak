@@ -1,12 +1,31 @@
 const readJson = require("../util/read-json.js");
 
 async function checkCondition(data, o, chat) {
-    const message = data[o].message;
-    const parsed_message = message.split(" ");
-    const conditionScore = parsed_message[1];
-
     const scoresJson = "./data/scores.json";
     const scoresData = await readJson(scoresJson);
+
+    const message = data[o].message;
+    const parsed_message = message.split(" ");
+    let isDealer = parsed_message[1]; if (isDealer === "친" || isDealer === "오야") { isDealer = "선"; }
+    let conditionScore = parsed_message[2];
+    let bonusScore = "";
+    bonusScore = parsed_message[3];
+    let bonusRound = "";
+    bonusRound = parsed_message[4];
+
+    conditionScore = parseInt(conditionScore, 10);
+    bonusScore = parseInt(bonusScore, 10); if (isNaN(bonusScore)) { bonusScore = 0; }
+    bonusRound = parseInt(bonusRound, 10); if (isNaN(bonusRound)) { bonusRound = 0; }
+    conditionScore = conditionScore - bonusScore;
+    conditionScore = conditionScore - (bonusRound * 100);
+
+    if (isDealer === "선") { 
+        if (conditionScore >  11600) { result = await overMangan(conditionScore, true); }
+    }
+
+    else if (isDealer === "자") { 
+        if (conditionScore >= 7700) { result = await overMangan(conditionScore, false); }
+    }
 
     const results = { 친: [], 자: [] };
     

@@ -5,9 +5,21 @@ async function calculateScore(data, o, chat) {
     const scoreData = await readJson(scoreJson);
 
     const message = data[o].message;
-    const parsed_message = message.slice(4);
+    const parsed_message = message.split(" ");
+    let isDealer = parsed_message[1]; if (isDealer === "친" || isDealer === "오야") { isDealer = "선"; }
+    const han = parsed_message[2];
+    let overMangan = false; if (han > 5) { overMangan = true; }
+    let fu = "";
+    let result = "";
+
+    if (!overMangan) { 
+        fu = parsed_message[3]; 
+        result = `(쯔모) ${scoreData[isDealer]["쯔모"][han][fu]}점 / (론) ${scoreData[isDealer]["론"][han][fu]}점 입니다`;
+    }
+    else {
+        result = `(쯔모) ${scoreData[isDealer]["쯔모"][han]}점 / (론) ${scoreData[isDealer]["론"][han]}점 입니다`;
+    }
     
-    const result = `${scoreData[parsed_message]}점 입니다`;
     await chat.send(result);
 }
 

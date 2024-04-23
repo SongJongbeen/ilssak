@@ -6,3 +6,4 @@
 > - https://gh.ekyu.moe/mjai-reviewer-demo.html
 > - https://mjai.ekyu.moe/
 > - https://github.com/latorc/MahjongCopilot
+> - https://github.com/shinkuan/Akagi

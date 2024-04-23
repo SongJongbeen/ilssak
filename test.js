@@ -47,8 +47,8 @@ async function test (streamerName) {
             }
 
             if (isActive) {
-                if (streamerName === "금성경") {    // 테스트중
-                // if (streamerName === "일급천재") {
+                // if (streamerName === "금성경") {    // 테스트중
+                if (streamerName === "일급천재") {
                     runCelestial(data, o, chat);
                 }
     
