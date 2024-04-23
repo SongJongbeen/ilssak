@@ -1,0 +1,101 @@
+import requests, json, time
+import config
+from type import tierType, levelUpPoint
+
+class Stats(commands.Cog):
+
+        nickname = 닉네임
+        base = 'https://5-data.amae-koromo.com/api/v2/pl4/'
+        mode = '16,15,12,11,9,8'
+
+        name = dump['nickname']
+        id = dump['id']
+        count = statsJson['count']
+        busting_rate = dump['negative_rate']
+        avg_rank = dump['avg_rank']
+        call_rate = dump['副露率']
+        average_turns = dump['和了巡数']
+        win_rate = dump['和牌率']
+        average_win_score = dump['平均打点']
+        average_deal_in_score = dump['平均铳点']
+        deal_in_rate = dump['放铳率']
+        exhaustive_draw_rate = dump['流局率']
+        exhaustive_draw_per_rate = dump['流听率']
+        riichi_rate = dump['立直率']
+        tsumo_rate = dump['自摸率']
+
+        level_score = dump.get('level')['score']
+        level_delta = dump.get('level')['delta']
+        tier = dump.get('level')['id']
+        max_level_score = dump.get('max_level')['score']
+        max_level_delta = dump.get('max_level')['delta']
+        max_tier = dump.get('max_level')['id']
+
+        zone = int(bin(dump['id'] >> 23), 2)
+        if zone >= 0 and zone <= 6:
+            zone = 'Ⓒ'
+        elif zone >= 7 and zone <= 12:
+            zone = 'Ⓙ'
+        elif zone >= 13 and zone <= 15:
+            zone = 'Ⓔ'
+        else:
+            zone = 'unknown'
+
+        if str(tier)[0:3] == '103':
+            tiercolor = discord.Color.yellow()
+        elif str(tier)[0:3] == '104':
+            tiercolor = discord.Color.dark_orange()
+        elif str(tier)[0:3] == '105':
+            tiercolor = discord.Color.dark_red()
+        elif str(tier)[0:3] == '106' or str(tier)[0:3] == '107':
+            tiercolor = discord.Color.dark_blue()
+
+        playerRecords = f'{base}player_records/{pid}/{start}999/1262304000000?limit=10&mode={mode}&descending=true&tag='
+        playerRecordsJson = requests.get(playerRecords).json()
+        gamecount = 0
+        result = []
+        result_edit = []
+
+        while gamecount < 10:
+            game_data = playerRecordsJson[int(gamecount)]['players']
+            sorted_players = sorted(game_data, key=lambda x: x['score'], reverse=True)
+            index_of_mimo = next((i for i, player in enumerate(sorted_players) if player['nickname'] == name), None)
+
+            if index_of_mimo is not None:
+                rank = index_of_mimo + 1
+                result.append(rank)
+                gamecount = gamecount + 1
+
+            if gamecount == 10:
+                for item in result:
+                    item_mod = str(item).replace('1', ':one:').replace('2', ':two:').replace('3', ':three:').replace('4', ':four:')
+                    result_edit.append(item_mod)
+                break
+
+        embed = discord.Embed(title=f'전적 - {zone}  {name}', description=f'{tierType[tier]} {level_score + level_delta}/{levelUpPoint[tier]}pt', url=f'https://amae-koromo.sapk.ch/player/{id}/', color=tiercolor)
+        
+        embed.add_field(name='기록 대국 수', value=f'{count}')
+        embed.add_field(name='화료율', value=f'{round(float(win_rate) * 100, 2)}%')
+        embed.add_field(name='방총률', value=f'{round(float(deal_in_rate) * 100, 2)}%')
+        embed.add_field(name='쯔모율', value=f'{round(float(tsumo_rate) * 100, 2)}%')
+        embed.add_field(name='유국 텐파이율', value=f'{round(float(exhaustive_draw_per_rate) * 100, 2)}%')
+        embed.add_field(name='후로율', value=f'{round(float(call_rate) * 100, 2)}%')
+        embed.add_field(name='리치율', value=f'{round(float(riichi_rate) * 100, 2)}%')
+        embed.add_field(name='화료순', value=f'{round(float(average_turns), 2)}')
+        embed.add_field(name='평균 화료', value=f'{average_win_score}점')
+        embed.add_field(name='평균 방총', value=f'{average_deal_in_score}점')
+        embed.add_field(name='평균 순위', value=f'{round(float(avg_rank), 2)}등')
+        embed.add_field(name='토비율', value=f'{round(float(busting_rate) * 100, 2)}%')
+        embed.add_field(name='최고 단위', value=f'{tierType[max_tier]} {max_level_score + max_level_delta}/{levelUpPoint[max_tier]}pt')
+        embed.add_field(name='최근 등수', value=f'{result_edit[9]}{result_edit[8]}{result_edit[7]}{result_edit[6]}{result_edit[5]}{result_edit[4]}{result_edit[3]}{result_edit[2]}{result_edit[1]} {result_edit[0]}')
+
+        embed.set_footer(text='Powered by SAPikachu', icon_url='https://pbs.twimg.com/profile_images/1307643257090838528/ZS2yckce_400x400.jpg')
+
+        await interaction.followup.send(embed=embed)
+
+        webhook_messaeg = f'> [{time.strftime("%Y.%m.%d %H:%M:%S")}] [STATS] PID={id} NAME={name}'
+        SyncWebhook.from_url(config.WEBHOOK_URL).send(webhook_messaeg)
+        print(webhook_messaeg)
+
+async def setup(bot):
+    await bot.add_cog(Stats(bot))
