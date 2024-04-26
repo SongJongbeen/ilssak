@@ -33,7 +33,7 @@ async function registerQuestion(data, o, chat) {
     console.log(questionData);
     await writeSheet(sheetName, startCell, endCell, questionData);
 
-    await chat.send("질문이 등록되었습니다");    
+    await chat.send("질문이 등록되었습니다");
 }
 
 module.exports = registerQuestion;

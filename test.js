@@ -1,3 +1,5 @@
+delete process.env.SPREADSHEET_ID;
+
 const buzzk = require("buzzk");
 const fs = require('fs').promises;
 const runCelestial = require("./src/celestial-league/run-celestial.js");
@@ -34,6 +36,7 @@ async function test (streamerName) {
 
             if (data[o].message === "!on") {
                 if (data[o].author.name === "금성경" || data[o].author.name === "일급천재" || data[o].author.name === "해모수보컬") {
+                    if (isActive) { chat.send("일싹이가 이미 깨어있습니다"); return; } // 이미 활성화 되어있을 때 (중복 방지)
                     isActive = true;
                     chat.send("일싹이가 깨어났습니다!");
                 } else { chat.send("일싹이를 깨울 권한이 없습니다"); }
@@ -41,6 +44,7 @@ async function test (streamerName) {
 
             if (data[o].message === "!off") {
                 if (data[o].author.name === "금성경" || data[o].author.name === "일급천재" || data[o].author.name === "해모수보컬") {
+                    if (!isActive) { chat.send("일싹이가 이미 잠들어있습니다"); return; } // 이미 비활성화 되어있을 때 (중복 방지)
                     isActive = false;
                     chat.send("일싹이 자러갈게~");
                 } else { chat.send("일싹이를 재울 권한이 없습니다"); }
@@ -48,7 +52,7 @@ async function test (streamerName) {
 
             if (isActive) {
                 // if (streamerName === "금성경") {    // 테스트중
-                if (streamerName === "일급천재") {
+                if (streamerName === "금성경") {
                     runCelestial(data, o, chat);
                 }
     

@@ -1,5 +1,4 @@
-1. !점수
-2. !조건
+1. !조건
 
 3. !채점
 > - https://github.com/Equim-chan/mjai-reviewer

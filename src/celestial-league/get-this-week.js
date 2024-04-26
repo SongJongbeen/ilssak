@@ -31,10 +31,11 @@ async function getThisWeek(data, o, chat) {
     let callSuccessRates = [PersonalData[0][14], PersonalData[1][14], PersonalData[2][14], PersonalData[3][14]];
     let damaRates = [PersonalData[0][15], PersonalData[1][15], PersonalData[2][15], PersonalData[3][15]];
     let avgWinScores = [PersonalData[0][16], PersonalData[1][16], PersonalData[2][16], PersonalData[3][16]];
-
+    let hwaBangRates = [(parseFloat(PersonalData[0][9]) - parseFloat(PersonalData[0][10])).toFixed(2), (parseFloat(PersonalData[1][9]) - parseFloat(PersonalData[1][10])).toFixed(2), (parseFloat(PersonalData[2][9]) - parseFloat(PersonalData[2][10])).toFixed(2), (parseFloat(PersonalData[3][9]) - parseFloat(PersonalData[3][10])).toFixed(2)];
+    
     if (userMessage === "!이번주") { await chat.send(`이번주 출전선수: ${participants[0]} (${participantsName[0]}), ${participants[1]} (${participantsName[1]}), ${participants[2]} (${participantsName[2]}), ${participants[3]} (${participantsName[3]})`) }
 
-    if (userMessage === "!이번주 참가자") { await chat.send(`이번주 출전선수: ${participants[0]} (${participantsName[0]}), ${participants[1]} (${participantsName[1]}), ${participants[2]} (${participantsName[2]}), ${participants[3]} (${participantsName[3]})`) }
+    else if (userMessage === "!이번주 참가자") { await chat.send(`이번주 출전선수: ${participants[0]} (${participantsName[0]}), ${participants[1]} (${participantsName[1]}), ${participants[2]} (${participantsName[2]}), ${participants[3]} (${participantsName[3]})`) }
 
     else {
         const query = userMessage.split(" ")[1];
@@ -52,6 +53,7 @@ async function getThisWeek(data, o, chat) {
         else if (query === "후로율") { await chat.send(`이번주 후로율: ${participants[0]} (${callRates[0]}), ${participants[1]} (${callRates[1]}), ${participants[2]} (${callRates[2]}), ${participants[3]} (${callRates[3]})`) }
         else if (query === "후로성공률") { await chat.send(`이번주 후로성공률: ${participants[0]} (${callSuccessRates[0]}), ${participants[1]} (${callSuccessRates[1]}), ${participants[2]} (${callSuccessRates[2]}), ${participants[3]} (${callSuccessRates[3]})`) }
         else if (query === "다마율") { await chat.send(`이번주 다마율: ${participants[0]} (${damaRates[0]}), ${participants[1]} (${damaRates[1]}), ${participants[2]} (${damaRates[2]}), ${participants[3]} (${damaRates[3]})`) }
+        else if (query === "화방률") { await chat.send(`이번주 화방률: ${participants[0]} (${hwaBangRates[0]}), ${participants[1]} (${hwaBangRates[1]}), ${participants[2]} (${hwaBangRates[2]}), ${participants[3]} (${hwaBangRates[3]})`)}
         else if (query === "평균타점") { await chat.send(`이번주 평균타점: ${participants[0]} (${avgWinScores[0]}), ${participants[1]} (${avgWinScores[1]}), ${participants[2]} (${avgWinScores[2]}), ${participants[3]} (${avgWinScores[3]})`) }
         else if (query === "평균화료율") { await chat.send(`이번주 참가자들의 평균 화료율: ${AvgData[0][0]} (가중평균: ${AvgData[1][0]})`) }
         else if (query === "평균방총률") { await chat.send(`이번주 참가자들의 평균 방총률: ${AvgData[0][1]} (가중평균: ${AvgData[1][1]})`) }
