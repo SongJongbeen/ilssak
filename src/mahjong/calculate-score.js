@@ -12,6 +12,8 @@ async function calculateScore(data, o, chat) {
     let fu = "";
     let result = "";
 
+    if (message === "점수") { return; }
+
     if (!overMangan) { 
         fu = parsed_message[3]; 
         result = `(쯔모) ${scoreData[isDealer]["쯔모"][han][fu]}점 / (론) ${scoreData[isDealer]["론"][han][fu]}점 입니다`;

@@ -16,7 +16,7 @@ const buzzkChat = buzzk.chat;
 
 async function test (streamerName) {
 
-    let isActive = false; //활성화 여부
+    let isActive = true; //활성화 여부
 
     let chSearch = await buzzk.channel.search(streamerName); //채널 검색
     
@@ -35,7 +35,7 @@ async function test (streamerName) {
             console.log(data[o].message);
 
             if (data[o].message === "!on") {
-                if (data[o].author.name === "금성경" || data[o].author.name === "일급천재" || data[o].author.name === "해모수보컬") {
+                if (data[o].author.name === "금성경" || data[o].author.name === "일급천재" || data[o].author.name === "해모수보컬" || data[o].author.name === "캐피탈호") {
                     if (isActive) { chat.send("일싹이가 이미 깨어있습니다"); return; } // 이미 활성화 되어있을 때 (중복 방지)
                     isActive = true;
                     chat.send("일싹이가 깨어났습니다!");
@@ -43,7 +43,7 @@ async function test (streamerName) {
             }
 
             if (data[o].message === "!off") {
-                if (data[o].author.name === "금성경" || data[o].author.name === "일급천재" || data[o].author.name === "해모수보컬") {
+                if (data[o].author.name === "금성경" || data[o].author.name === "일급천재" || data[o].author.name === "해모수보컬" || data[o].author.name === "캐피탈호") {
                     if (!isActive) { chat.send("일싹이가 이미 잠들어있습니다"); return; } // 이미 비활성화 되어있을 때 (중복 방지)
                     isActive = false;
                     chat.send("일싹이 자러갈게~");

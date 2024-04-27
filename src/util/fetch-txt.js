@@ -4,7 +4,7 @@ async function fetchTextWithPuppeteer(url, selector, attributeOrProperty) {
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: 'networkidle2' });
   
-    await page.waitForSelector(selector, { timeout: 5000 });
+    await page.waitForSelector(selector, { timeout: 50000 });
   
     // 속성 또는 프로퍼티 접근하기
     const value = await page.$eval(selector, (element, attrOrProp) => {
