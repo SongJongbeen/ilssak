@@ -1,4 +1,7 @@
 const registerPaipu = require('../mahjong/register-paipu.js');
+const registerSchedule = require('../util/register-schedule.js');
+const registerWeeklySchedule = require('../util/register-weekly-schedule.js');
+const registerCommand = require('../util/register-command.js');
 const calculateEfficiency = require('../mahjong/calculate-efficiency.js');
 const calculateScore = require('../mahjong/calculate-score.js');
 const checkCondition = require('../mahjong/check-condition.js');
@@ -19,10 +22,13 @@ const sakuraGacha = require('../mahjong/sakura-gacha.js');
 const bambooGacha = require('../mahjong/bamboo-gacha.js');
 const collabo = require('../mahjong/collabo.js');
 
-async function runFunction(data, o, chat) {
+async function runFunction(data, o, chat, streamerName) {
     message = data[o].message;
 
-    if (message.startsWith("!패보")) { await registerPaipu(data, o, chat); }
+    if (message.startsWith("!패보")) { await registerPaipu(data, o, chat, streamerName); }
+    else if (message.startsWith("!스케줄")) { await registerSchedule(data, o, chat, streamerName); }
+    else if (message.startsWith("!일정")) { await registerWeeklySchedule(data, o, chat, streamerName); }
+    else if (message.startsWith("!명령어")) { await registerCommand(data, o, chat); }
     else if (message.startsWith("!패효율")) { calculateEfficiency(data, o, chat); }
     else if (message.startsWith("!점수")) { calculateScore(data, o, chat); }
     else if (message.startsWith("!조건")) { checkCondition(data, o, chat); }

@@ -5,6 +5,7 @@ async function sendResponse(data, o, chat) {
 
     const terminology = await readJson("./data/terminology.json");
     const commands = await readJson("./data/commands.json");
+    const schedule = await readJson("./data/schedule.json");
     const numbers = await readJson("./data/numbers.json");
     const urls = await readJson("./data/urls.json");
 
@@ -13,6 +14,7 @@ async function sendResponse(data, o, chat) {
     {
         let inputMessage = message.slice(1);
         if (inputMessage in commands) { await chat.send(commands[inputMessage]) };
+        if (inputMessage in schedule) { await chat.send(schedule[inputMessage]) };
     }
 
     // 물음표로 시작하는지 확인

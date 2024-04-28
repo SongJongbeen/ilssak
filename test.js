@@ -1,5 +1,3 @@
-delete process.env.SPREADSHEET_ID;
-
 const buzzk = require("buzzk");
 const fs = require('fs').promises;
 const runCelestial = require("./src/celestial-league/run-celestial.js");
@@ -8,7 +6,7 @@ const sendResponse = require("./src/chat/send-response.js");
 
 require("dotenv").config({ path: ".env" })
 
-streamerName = "금성경";    // 테스트중
+let streamerName = "금성경";    // 테스트중
 
 buzzk.login(process.env.NID_AUT, process.env.NID_SES); //로그인
 
@@ -51,13 +49,14 @@ async function test (streamerName) {
             }
 
             if (isActive) {
-                // if (streamerName === "금성경") {    // 테스트중
-                if (streamerName === "금성경") {
+                // if (streamerName === "일급천재") {    // 테스트중
+                if (streamerName === "일급천재") {
                     runCelestial(data, o, chat);
                 }
     
                 else {
-                    runFunction(data, o, chat);
+                    streamerName = "해모수보컬";    // 테스트중
+                    runFunction(data, o, chat, streamerName);
                     sendResponse(data, o, chat);
                 }
             }
