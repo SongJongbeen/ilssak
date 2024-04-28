@@ -4,8 +4,13 @@ async function getPaipu(data, o, chat) {
     console.log("getting paipu");
     let message = data[o].message;
     let week = message.split(" ")[1];
-    let player = "";
-    try { player = message.split(" ")[2]; } catch { player = ""; }
+    let playerName = "";
+    try { playerName = message.split(" ")[2]; } catch { playerName = ""; }
+
+    // change playerName using ./players.json
+    let players = require('./players.json');
+    let player = players[playerName];
+    if (player) { playerName = player; }
 
     const sheetName = "패보";
     const startCell = "U2";

@@ -15,6 +15,11 @@ async function settleBet(data, o, chat) {
     let parsed_message = message.split(" ");
     let winner = parsed_message[1];
 
+    // change playerName using ./players.json
+    let players = require('./players.json');
+    let player = players[winner];
+    if (player) { winner = player; }
+
     const sheetName = "포인트";
     const startCell = "B4";
     const endCell = "H500";

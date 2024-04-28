@@ -12,6 +12,11 @@ async function betPoint(data, o, chat) {
     let playerName = parsed_message[1];
     let inputPoint = parsed_message[2];
 
+    // change playerName using ./players.json
+    let players = require('./players.json');
+    let player = players[playerName];
+    if (player) { playerName = player; }
+
     let sheetName = "포인트";
     let startCell = "B3";
     let endCell = "H500";
