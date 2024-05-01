@@ -14,7 +14,7 @@ async function givePoint(data, o, chat) {
     if (userName === "금성경" || userName === "일급천재") {
         let sheetName = "포인트";
         let startCell = "B3";
-        let endCell = "H500";
+        let endCell = "G500";
 
         let pointData = await readSheet(sheetName, startCell, endCell);
 
@@ -30,7 +30,7 @@ async function givePoint(data, o, chat) {
             await chat.send("등록된 계정이 없습니다. 해당 계정을 추가하겠습니다");
             let lastRow = pointData.length;
             lastRow = lastRow.toString();
-            let newPointData = [lastRow, inputUserName, inputPoint, "", "", "+" + inputPoint, "0"];
+            let newPointData = [lastRow, inputUserName, inputPoint, "", "", ""];
             pointData.push(newPointData);
             await writeSheet(sheetName, startCell, endCell, pointData);
 
@@ -54,7 +54,7 @@ async function takePoint(data, o, chat) {
     if (userName === "금성경" || userName === "일급천재") {
         let sheetName = "포인트";
         let startCell = "B3";
-        let endCell = "H500";
+        let endCell = "G500";
 
         let pointData = await readSheet(sheetName, startCell, endCell);
 
@@ -70,7 +70,7 @@ async function takePoint(data, o, chat) {
             await chat.send("등록된 계정이 없습니다. 해당 계정을 추가하겠습니다");
             let lastRow = pointData.length;
             lastRow = lastRow.toString();
-            let newPointData = [lastRow, inputUserName, inputPoint, "", "", "+" + inputPoint, "0"];
+            let newPointData = [lastRow, inputUserName, inputPoint, "", "", ""];
             pointData.push(newPointData);
             await writeSheet(sheetName, startCell, endCell, pointData);
 

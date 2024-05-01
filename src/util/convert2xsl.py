@@ -16,8 +16,8 @@ def json_to_excel(j_data, e_file):
 
 # 사용 예제
 if __name__ == "__main__":
-    json_file = 'data/terminology.json'  # JSON 파일 경로
-    excel_file = 'data/terminology.xlsx'  # 생성될 Excel 파일 경로
+    json_file = 'data/.json'  # JSON 파일 경로
+    excel_file = 'data/.xlsx'  # 생성될 Excel 파일 경로
 
     # JSON 파일 로드
     json_data = load_json(json_file)

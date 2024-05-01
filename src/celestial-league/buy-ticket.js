@@ -5,6 +5,9 @@ async function buyTicket(data, o, chat) {
     console.log("buying ticket");
 
     let userName = data[o]["author"]["name"];
+    let message = data[o]["message"];
+    let parsedMessage = message.split(" ");
+    let playerName = parsedMessage[1];
 
     // check if there is a userName in the sheet
     const sheetName = "포인트";
@@ -25,13 +28,23 @@ async function buyTicket(data, o, chat) {
         }
         else {
             userPointData[2] = currentPoint - 10000;
-            userPointData[5] = "-10000";
-            userPointData[6] = parseInt(userPointData[6]) + 1;
-            userPointData[6] = userPointData[6].toString();
             await writeSheet(sheetName, startCell, endCell, pointData);
-            await chat.send("혼천선수 출전우대권을 구매하였습니다");
         }
+
+        let ticketSheetName = "선수우대권";
+        let ticketStartCell = "B3";
+        let ticketEndCell = "E500";
+
+        let ticketData = await readSheet(ticketSheetName, ticketStartCell, ticketEndCell);
+        let lastRow = ticketData.length;
+
+        ticketData.push([lastRow, userName, playerName, "false"]);
+
+        console.log(ticketData)
+        await writeSheet(ticketSheetName, ticketStartCell, ticketEndCell, ticketData);
+        await chat.send(`${userName}님이 ${playerName}선수의 선수우대권을 구매하였습니다`)
     }
+
     else {
         await chat.send("등록된 계정이 없습니다. 닉네임을 변경하셨다면 관리자에게 문의해주세요")
     }

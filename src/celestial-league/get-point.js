@@ -6,12 +6,6 @@ async function getPoint(data, o, chat) {
     let userName = data[o]["author"]["name"];
 
     let message = data[o].message;
-    let parsed_message = message.split(" ");
-    let inputUserName = parsed_message[1];
-
-    if (inputUserName) {
-        userName = inputUserName;
-    }
     
     // check if there is a userName in the sheet
     const sheetName = "포인트";

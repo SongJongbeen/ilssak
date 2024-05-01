@@ -18,6 +18,7 @@ async function getRecord(data, o, chat) {
     if (match) { query1 = match[1]; }
 
     let idx = parseInt(query1, 10) - 1;
+    let result = "";
 
     if (query2 === "우승자") { result = `${query1}주차 우승자는 ${recordData[idx][6]} 입니다`; }
     else if (query2 === "다시보기") { result = `${query1}주차 다시보기는 ${recordData[idx][7]} 입니다`; }

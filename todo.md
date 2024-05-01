@@ -16,10 +16,11 @@
 git push -u origin main
 
 registerPaipu에서 streamerName이 해모수보컬일 경우, 1일 1패보
-!일정추가
-!월 ~ !일
-?마장지도
 
 =======
 
 일싹이 이메일: ilssak@celestial-league.iam.gserviceaccount.com
+
+======
+
+명령어 추가 & 일정 추가는 해모수 및 매니저만 가능하도록

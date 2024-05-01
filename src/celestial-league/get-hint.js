@@ -1,11 +1,14 @@
+const e = require('express');
+const getStat = require('./get-stat.js');
+
 async function getHint(data, o, chat) {
     let messgae = data[o].message;
 
     let parsed_message = message.split(" ");
     let command = parsed_message[1];
 
-    if (message === "!힌트") {
-        const commandLink = "(사용설명서 링크)";
+    if (message === "!명령어") {
+        const commandLink = "https://drive.google.com/file/d/1VhqvmgQR2Z--hTcsOzFRKNRE-G79edWj/view?usp=sharing";
         await chat.send(`명령어 모음: ${commandLink}`);
         return;
     }
@@ -14,10 +17,11 @@ async function getHint(data, o, chat) {
             await chat.send("(명령어) !질문 [질문하고 싶은 내용] 궁금한 질문을 등록해요!");
         }
         else if (command === "기록") {
-            await chat.send("(명령어) !기록 [찾고자 하는 내용] 궁금한 대회 기록을 조회해요!");
+            await chat.send("(명령어) !기록 [n주차] [찾고자 하는 내용] 궁금한 대회 기록을 조회해요! (찾을 수 있는 내용: 우승자, 다시보기, 경기결과, 참가자)");
         }
         else if (command === "이번주") {
             await chat.send("(명령어) !이번주 [*찾고자 하는 스탯] 이번주 출전선수 명단 & 스탯을 조회해요!");
+            await getStat(data, o, chat);
         }
         else if (command === "순위") {
             await chat.send("(명령어) !순위 [*선수 이름] 궁금한 선수의 순위를 조회해요");
@@ -40,26 +44,25 @@ async function getHint(data, o, chat) {
         else if (command === "출첵") {
             await chat.send("(명령어) !출첵 출석체크하고 포인트를 획득해요!");
         }
-        else if (command === "베팅") {
-            await chat.send("(명령어) !베팅 [선수명] [베팅액] 1등 선수를 예측하고 포인트를 걸어요!");
+        else if (command === "응원") {
+            await chat.send("(명령어) !응원 [선수번호] [응원금액] 1등 선수를 예측하고 포인트를 걸어요!");
         }
         else if (command === "구매") {
-            await chat.send("(명령어) !구매 10,000 포인트를 지불해 혼천 선수우선권을 구매해요!");
+            await chat.send("(명령어) !구매 [선수이름] 10,000 포인트를 지불해 혼천 선수우선권을 구매해요!");
         }
         else if (command === "포인트") {
-            await chat.send("(명령어) !포인트 [*시청자 이름] 현재 포인트 현황을 조회해요");
+            await chat.send("(명령어) !포인트 현재 포인트 현황을 조회해요");
         }
         else if (command === "등락") {
             await chat.send("(명령어) !등락 [*시청자 이름] 최근 포인트 등락 정보를 조회해요");
         }
-        else if (command === "베팅정보") {
-            await chat.send("(명령어) !베팅정보 [*시청자 이름] 현재 베팅 정보를 조회해요");
+        else if (command === "응원정보") {
+            await chat.send("(명령어) !응원정보 현재 베팅 정보를 조회해요");
         }
         else {
             await chat.send("해당 명령어를 찾을 수 없습니다");
         }
     }
-
 }
 
 module.exports = getHint;

@@ -6,17 +6,11 @@ async function getBettingInfo(data, o, chat) {
     let userName = data[o]["author"]["name"];
 
     let message = data[o].message;
-    let parsed_message = message.split(" ");
-    let inputUserName = parsed_message[1];
 
-    if (inputUserName) {
-        userName = inputUserName;
-    }
-    
     // check if there is a userName in the sheet
     const sheetName = "포인트";
     const startCell = "B3";
-    const endCell = "H500";
+    const endCell = "G500";
 
     let pointData = await readSheet(sheetName, startCell, endCell);
 
@@ -25,7 +19,8 @@ async function getBettingInfo(data, o, chat) {
     if (userPointData) {
         let playerName = userPointData[3];
         let bettingPoint = userPointData[4];
-        await chat.send(`${userName}님의 배팅 정보: ${playerName} (${bettingPoint})`);
+        if (playerName === "") { await chat.send("아직 응원한 선수가 없습니다"); }
+        else { await chat.send(`${userName}님의 응원 정보: ${playerName}번 선수 (${bettingPoint})`); }
     }
 
     else {
