@@ -10,10 +10,10 @@
     "mahjong-tile-efficiency": "^1.0.3",
     "node-fetch": "^3.3.2",
     "puppeteer": "^22.6.4"
-  }
+  },
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "start": "node app.js",
+    "start": "node test.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "main": "test.js"
