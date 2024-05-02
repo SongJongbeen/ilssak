@@ -42,32 +42,39 @@ async function runCelestial(data, o, chat) {
         else { await chat.send("응원을 종료할 권한이 없습니다."); }
     }
 
-    if (message.startsWith("!명령어")) { await getHint(data, o, chat); }    // 파워포인트 링크 따로 만들기
-    else if (message.startsWith("!질문")) { await registerQuestion(data, o, chat); }
-    else if (message.startsWith("!기록")) { await getRecord(data, o, chat); }
-    else if (message.startsWith("!이번주")) { await getThisWeek(data, o, chat); }
-    else if (message.startsWith("!스탯목록")) { await getStat(data, o, chat); }
-    else if (message.startsWith("!순위")) { await getRank(data, o, chat); }
-    else if (message.startsWith("!지난주")) { await getResult(data, o, chat); }
-    else if (message.startsWith("!상금")) { await getPrize(data, o, chat); }
-    else if (message.startsWith("!패보")) { await getPaipu(data, o, chat); }
-    else if (message.startsWith("!시트")) { await getSheetUrl(data, o, chat); }
-    else if (message.startsWith("!링크")) { await getSheetUrl(data, o, chat); }
-    else if (message.startsWith("!1회전")) { await getFirstRound(data, o, chat); }
-    else if (message.startsWith("!출첵")) { await getAttendance(data, o, chat); }
-    else if (message.startsWith("!구매")) { await buyTicket(data, o, chat); }
-    else if (message.startsWith("!포인트")) { await getPoint(data, o, chat); }
-    else if (message.startsWith("!등락")) { await getDelta(data, o, chat); }
-    else if (message.startsWith("!응원정보")) { await getBettingInfo(data, o, chat); }
-    else if (message.startsWith("!응원현황")) { await getBettingRate(data, o, chat); } 
-    else if (message.startsWith("!지급")) { await givePoint(data, o, chat); }
-    else if (message.startsWith("!차감")) { await takePoint(data, o, chat); }
-    else if (message.startsWith("!응원")) { 
-        if (!isBetting) { await chat.send("현재 응원할 수 있는 시간이 아니에요"); }
-        else { await betPoint(data, o, chat); }
+    try {
+        if (message.startsWith("!명령어")) { await getHint(data, o, chat); }
+        else if (message.startsWith("!질문")) { await registerQuestion(data, o, chat); }
+        else if (message.startsWith("!기록")) { await getRecord(data, o, chat); }
+        else if (message.startsWith("!이번주")) { await getThisWeek(data, o, chat); }
+        else if (message.startsWith("!스탯목록")) { await getStat(data, o, chat); }
+        else if (message.startsWith("!순위")) { await getRank(data, o, chat); }
+        else if (message.startsWith("!지난주")) { await getResult(data, o, chat); }
+        else if (message.startsWith("!상금")) { await getPrize(data, o, chat); }
+        else if (message.startsWith("!패보")) { await getPaipu(data, o, chat); }
+        else if (message.startsWith("!시트")) { await getSheetUrl(data, o, chat); }
+        else if (message.startsWith("!링크")) { await getSheetUrl(data, o, chat); }
+        else if (message.startsWith("!1회전")) { await getFirstRound(data, o, chat); }
+        else if (message.startsWith("!1경기")) { await getFirstRound(data, o, chat); }
+        else if (message.startsWith("!출첵")) { await getAttendance(data, o, chat); }
+        else if (message.startsWith("!구매")) { await buyTicket(data, o, chat); }
+        else if (message.startsWith("!포인트")) { await getPoint(data, o, chat); }
+        else if (message.startsWith("!등락")) { await getDelta(data, o, chat); }
+        else if (message.startsWith("!응원정보")) { await getBettingInfo(data, o, chat); }
+        else if (message.startsWith("!응원현황")) { await getBettingRate(data, o, chat); } 
+        else if (message.startsWith("!지급")) { await givePoint(data, o, chat); }
+        else if (message.startsWith("!차감")) { await takePoint(data, o, chat); }
+        else if (message.startsWith("!응원")) { 
+            if (!isBetting) { await chat.send("현재 응원할 수 있는 시간이 아니에요"); }
+            else { await betPoint(data, o, chat); }
+        }
+        else if (message.startsWith("!정산")) { await settleBet(data, o, chat); }
+        else { return; }
     }
-    else if (message.startsWith("!정산")) { await settleBet(data, o, chat); }
-    else { return; }
+    catch (error) {
+        console.error(error);
+        await chat.send("명령어 실행 중 오류가 발생했습니다");
+    }
 }
 
 module.exports = runCelestial;

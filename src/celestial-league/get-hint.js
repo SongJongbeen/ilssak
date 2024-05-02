@@ -8,7 +8,7 @@ async function getHint(data, o, chat) {
     let command = parsed_message[1];
 
     if (message === "!명령어") {
-        const commandLink = "https://drive.google.com/file/d/1VhqvmgQR2Z--hTcsOzFRKNRE-G79edWj/view?usp=sharing";
+        const commandLink = "https://drive.google.com/file/d/10dogw-bnTRddO-Lzcnbr8lm83hVPpr40/view?usp=sharing";
         await chat.send(`명령어 모음: ${commandLink}`);
         return;
     }
@@ -48,7 +48,7 @@ async function getHint(data, o, chat) {
             await chat.send("(명령어) !응원 [선수번호] [응원금액] 1등 선수를 예측하고 포인트를 걸어요!");
         }
         else if (command === "구매") {
-            await chat.send("(명령어) !구매 [선수이름] 10,000 포인트를 지불해 혼천 선수우선권을 구매해요!");
+            await chat.send("(명령어) !구매 [선수이름] 10,000 포인트를 지불해 슈퍼참여권을 구매해요!");
         }
         else if (command === "포인트") {
             await chat.send("(명령어) !포인트 현재 포인트 현황을 조회해요");
@@ -57,7 +57,10 @@ async function getHint(data, o, chat) {
             await chat.send("(명령어) !등락 [*시청자 이름] 최근 포인트 등락 정보를 조회해요");
         }
         else if (command === "응원정보") {
-            await chat.send("(명령어) !응원정보 현재 베팅 정보를 조회해요");
+            await chat.send("(명령어) !응원정보 현재 본인의 응원 정보를 조회해요");
+        }
+        else if (command === "응원현황") {
+            await chat.send("(명령어) !응원현황 현재 응원 현황을 조회해요");
         }
         else {
             await chat.send("해당 명령어를 찾을 수 없습니다");

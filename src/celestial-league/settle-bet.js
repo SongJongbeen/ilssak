@@ -23,13 +23,15 @@ async function settleBet(data, o, chat) {
 
     const dateStr = new Date().toLocaleString("en-US", {timeZone: "Asia/Seoul"});
 
+    console.log(dateStr);
+
     const sheetName = "포인트";
     let startCell = "J2";
     let endCell = "J6";
     let rateData = await readSheet(sheetName, startCell, endCell);
-    let rateRecord = `[${dateStr}] 전체 베팅금액: ${rateData[0][0]}\n1번선수 배당률: ${rateData[1][0]}\n2번선수 배당률: ${rateData[2][0]}\n3번선수 배당률: ${rateData[3][0]}\n4번선수 배당률: ${rateData[4][0]}`;
+    let rateRecord = `[${dateStr}] 전체 베팅금액: ${rateData[0][0]}\n1번선수: ${rateData[1][0]}\n2번선수: ${rateData[2][0]}\n3번선수: ${rateData[3][0]}\n4번선수: ${rateData[4][0]}`;
 
-
+    console.log(rateRecord);
 
     await fs.appendFile("src/celestial-league/records/rate-record.txt", rateRecord + "\n", "utf8", (err) => {
         if (err) throw err;
@@ -38,6 +40,7 @@ async function settleBet(data, o, chat) {
 
     console.log(rateRecord);
     
+    console.log(winner);
 
     // change playerName using ./players.json
     let players = require('./players.json');

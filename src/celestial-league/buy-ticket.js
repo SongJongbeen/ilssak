@@ -42,7 +42,7 @@ async function buyTicket(data, o, chat) {
 
         console.log(ticketData)
         await writeSheet(ticketSheetName, ticketStartCell, ticketEndCell, ticketData);
-        await chat.send(`${userName}님이 ${playerName}선수의 선수우대권을 구매하였습니다`)
+        await chat.send(`${userName}님이 ${playerName}선수의 슈퍼참여권을 구매하였습니다`)
     }
 
     else {

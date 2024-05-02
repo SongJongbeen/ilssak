@@ -18,8 +18,8 @@ async function getAttendance(data, o, chat) {
     const formattedDate = `${year}${formattedMonth}${formattedDay}`;
 
     const sheetName = "출석체크";
-    const startCell = "A1";
-    const endCell = "D100";
+    const startCell = "B2";
+    const endCell = "E1000";
     let attendanceData = await readSheet(sheetName, startCell, endCell);
 
     let lastRow = attendanceData.length;
@@ -44,7 +44,7 @@ async function getAttendance(data, o, chat) {
     console.log(attendanceData);
     await writeSheet(sheetName, startCell, endCell, attendanceData);
 
-    await chat.send("출석체크가 완료되었습니다");
+    await chat.send(`${userName}님 출석체크 완료!`);
 }
 
 module.exports = getAttendance;

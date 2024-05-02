@@ -21,8 +21,8 @@ async function registerQuestion(data, o, chat) {
     const formattedDate = `${year}${formattedMonth}${formattedDay}`;
 
     const sheetName = "인터뷰 질문";
-    const startCell = "A1";
-    const endCell = "D100";
+    const startCell = "B2";
+    const endCell = "E1000";
     let questionData = await readSheet(sheetName, startCell, endCell);
 
     let lastRow = questionData.length;
