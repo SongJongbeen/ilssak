@@ -1,8 +1,9 @@
 const readSheet = require('./read-sheet.js');
 const writeSheet = require('./write-sheet.js');
+const logger = require('./logger');
 
 async function betPoint(data, o, chat) {
-    console.log("betting point");
+    logger.info("betting point");
 
     let userName = data[o]["author"]["name"];
 
@@ -32,9 +33,9 @@ async function betPoint(data, o, chat) {
     let userPointData = pointData.find(row => row[1] === userName);
 
     if (userPointData) {
-        console.log(inputPoint)
+        logger.info(inputPoint)
         let currentPoint = userPointData[2];
-        console.log(currentPoint);
+        logger.info(currentPoint);
 
         // check if the user has already bet
         if (userPointData[3] !== "") {

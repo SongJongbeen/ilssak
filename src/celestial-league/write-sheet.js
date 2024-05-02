@@ -1,4 +1,5 @@
 const { google } = require('googleapis');
+const logger = require('./logger');
 const keys = require('../../celestial-league-key.json');
 require("dotenv").config({ path: ".env" })
 
@@ -26,7 +27,7 @@ async function writeSheet(sheetName, startCell, endCell, values) {
       }
     });
 
-    console.log(`Data updated successfully in range ${range} on ${sheetName}`);
+    logger.info(`Data updated successfully in range ${range} on ${sheetName}`);
   } catch (err) {
     console.error('The API returned an error: ' + err);
   }

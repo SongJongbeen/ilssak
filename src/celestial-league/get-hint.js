@@ -1,5 +1,6 @@
 const e = require('express');
 const getStat = require('./get-stat.js');
+const logger = require('./logger');
 
 async function getHint(data, o, chat) {
     let messgae = data[o].message;

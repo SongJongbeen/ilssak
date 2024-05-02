@@ -1,7 +1,8 @@
 const readSheet = require('./read-sheet');
+const logger = require('./logger');
 
 async function getBettingInfo(data, o, chat) {
-    console.log("getting betting info");
+    logger.info("getting betting info");
 
     let userName = data[o]["author"]["name"];
 

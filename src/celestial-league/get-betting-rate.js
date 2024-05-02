@@ -1,4 +1,5 @@
 const readSheet = require('./read-sheet.js');
+const logger = require('./logger');
 
 async function getBettingRate(data, o, chat) {
     message = data[o].message;

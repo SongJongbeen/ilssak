@@ -1,7 +1,8 @@
 const readSheet = require('./read-sheet.js');
+const logger = require('./logger');
 
 async function getPaipu(data, o, chat) {
-    console.log("getting paipu");
+    logger.info("getting paipu");
     let message = data[o].message;
     let week = message.split(" ")[1];
     let playerName = "";

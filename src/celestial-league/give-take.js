@@ -1,8 +1,9 @@
 const readSheet = require('./read-sheet.js');
 const writeSheet = require('./write-sheet.js');
+const logger = require('./logger');
 
 async function givePoint(data, o, chat) {
-    console.log("giving point");
+    logger.info("giving point");
 
     let userName = data[o]["author"]["name"];
 
@@ -42,7 +43,7 @@ async function givePoint(data, o, chat) {
 }
 
 async function takePoint(data, o, chat) {
-    console.log("taking point");
+    logger.info("taking point");
 
     let userName = data[o]["author"]["name"];
 

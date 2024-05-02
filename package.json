@@ -9,7 +9,8 @@
     "googleapis": "^134.0.0",
     "mahjong-tile-efficiency": "^1.0.3",
     "node-fetch": "^3.3.2",
-    "puppeteer": "^22.6.4"
+    "puppeteer": "^22.6.4",
+    "winston": "^3.13.0"
   },
   "scripts": {
     "build": "webpack --config webpack.config.js",

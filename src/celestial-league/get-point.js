@@ -1,7 +1,8 @@
 const readSheet = require('./read-sheet');
+const logger = require('./logger');
 
 async function getPoint(data, o, chat) {
-    console.log("getting point");
+    logger.info("getting point");
 
     let userName = data[o]["author"]["name"];
 

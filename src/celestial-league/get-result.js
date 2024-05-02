@@ -1,7 +1,8 @@
 const readSheet = require('./read-sheet.js');
+const logger = require('./logger');
 
 async function getResult(data, o, chat) {
-    console.log("getting result");
+    logger.info("getting result");
     // let message = data[o].message;
 
     const sheetName = "경기결과";
