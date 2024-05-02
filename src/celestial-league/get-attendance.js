@@ -1,9 +1,10 @@
 const readSheet = require('./read-sheet.js');
 const writeSheet = require('./write-sheet.js');
 const addPoint = require('./add-point.js');
+const logger = require('./logger');
 
 async function getAttendance(data, o, chat) {
-    console.log("getting attendance");
+    logger.info("getting attendance");
 
     let message = data[o].message;
     let userName = data[o]["author"]["name"];
@@ -41,7 +42,7 @@ async function getAttendance(data, o, chat) {
 
     attendanceData.push([lastRow, userName, formattedDate, point]);
 
-    console.log(attendanceData);
+    logger.info(attendanceData);
     await writeSheet(sheetName, startCell, endCell, attendanceData);
 
     await chat.send(`${userName}님 출석체크 완료!`);

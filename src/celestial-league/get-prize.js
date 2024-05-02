@@ -1,7 +1,8 @@
 const readSheet = require('./read-sheet.js');
+const logger = require('./logger');
 
 async function getPrize(data, o, chat) {
-    console.log("getting prize");
+    logger.info("getting prize");
     let message = data[o].message;
     let player = message.split(" ")[1];
 

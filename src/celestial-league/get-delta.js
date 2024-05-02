@@ -1,7 +1,8 @@
 const readSheet = require('./read-sheet');
+const logger = require('./logger');
 
 async function getDelta(data, o, chat) {
-    console.log("getting delta");
+    logger.info("getting delta");
 
     let userName = data[o]["author"]["name"];
 

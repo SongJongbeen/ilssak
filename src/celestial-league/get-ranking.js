@@ -1,7 +1,8 @@
 const readSheet = require('./read-sheet.js');
+const logger = require('./logger');
 
 async function getRank(data, o, chat) {
-    console.log("getting rank");
+    logger.info("getting rank");
     let message = data[o].message;
 
     const sheetName = "선수 순위";

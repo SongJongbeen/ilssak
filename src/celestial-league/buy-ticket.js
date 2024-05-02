@@ -1,8 +1,9 @@
 const readSheet = require('./read-sheet.js');
 const writeSheet = require('./write-sheet.js');
+const logger = require('./logger');
 
 async function buyTicket(data, o, chat) {
-    console.log("buying ticket");
+    logger.info("buying ticket");
 
     let userName = data[o]["author"]["name"];
     let message = data[o]["message"];
@@ -40,7 +41,7 @@ async function buyTicket(data, o, chat) {
 
         ticketData.push([lastRow, userName, playerName, "false"]);
 
-        console.log(ticketData)
+        logger.info(ticketData)
         await writeSheet(ticketSheetName, ticketStartCell, ticketEndCell, ticketData);
         await chat.send(`${userName}님이 ${playerName}선수의 슈퍼참여권을 구매하였습니다`)
     }

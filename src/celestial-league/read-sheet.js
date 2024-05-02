@@ -1,5 +1,7 @@
 const { google } = require('googleapis');
 const keys = require('../../celestial-league-key.json');
+const logger = require('./logger');
+
 require("dotenv").config({ path: ".env" })
 
 const client = new google.auth.JWT(
@@ -23,11 +25,11 @@ async function readSheet(sheetName, startCell, endCell) {
 
     const rows = response.data.values;
     if (rows.length) {
-      console.log('Data read from the spreadsheet:');
-      rows.map((row) => console.log(row));
+      logger.info('Data read from the spreadsheet:');
+      rows.map((row) => logger.info(row));
       return rows;
     } else {
-      console.log('No data found.');
+      logger.info('No data found.');
     }
   } catch (err) {
     console.error('The API returned an error: ' + err);

@@ -1,9 +1,10 @@
 const readSheet = require('./read-sheet.js');
 const writeSheet = require('./write-sheet.js');
+const logger = require('./logger');
 const fs = require('fs');
 
 async function settleBet(data, o, chat) {
-    console.log("settling bet");
+    logger.info("settling bet");
 
     let userName = data[o]["author"]["name"];
 
@@ -23,7 +24,7 @@ async function settleBet(data, o, chat) {
 
     const dateStr = new Date().toLocaleString("en-US", {timeZone: "Asia/Seoul"});
 
-    console.log(dateStr);
+    logger.info(dateStr);
 
     const sheetName = "포인트";
     let startCell = "J2";
@@ -31,16 +32,16 @@ async function settleBet(data, o, chat) {
     let rateData = await readSheet(sheetName, startCell, endCell);
     let rateRecord = `[${dateStr}] 전체 베팅금액: ${rateData[0][0]}\n1번선수: ${rateData[1][0]}\n2번선수: ${rateData[2][0]}\n3번선수: ${rateData[3][0]}\n4번선수: ${rateData[4][0]}`;
 
-    console.log(rateRecord);
+    logger.info(rateRecord);
 
     await fs.appendFile("src/celestial-league/records/rate-record.txt", rateRecord + "\n", "utf8", (err) => {
         if (err) throw err;
-        console.log("rate record saved");
+        logger.info("rate record saved");
     });
 
-    console.log(rateRecord);
+    logger.info(rateRecord);
     
-    console.log(winner);
+    logger.info(winner);
 
     // change playerName using ./players.json
     let players = require('./players.json');
@@ -52,7 +53,7 @@ async function settleBet(data, o, chat) {
 
     let pointData = await readSheet(sheetName, startCell, endCell);
 
-    console.log(pointData);
+    logger.info(pointData);
 
     let totalBetAmount = 0;
     let totalCorrectAmount = 0;
@@ -66,8 +67,8 @@ async function settleBet(data, o, chat) {
         }
     })
 
-    console.log(`Total bet amount: ${totalBetAmount}`);
-    console.log(`Total correct amount: ${totalCorrectAmount}`);
+    logger.info(`Total bet amount: ${totalBetAmount}`);
+    logger.info(`Total correct amount: ${totalCorrectAmount}`);
 
     pointData.forEach(row => {
         row[5] = "-" + row[4].toString();
@@ -81,10 +82,6 @@ async function settleBet(data, o, chat) {
             let rewardAmount = Math.floor((betAmount / totalCorrectAmount) * totalBetAmount); // 보상 금액
             let deltaValue = rewardAmount - betAmount; // 변동 포인트
             deltaValue = "+" + deltaValue.toString();
-
-            console.log(rewardAmount);
-            console.log(betAmount)
-            console.log(deltaValue);
 
             let resultAmount = rewardAmount.toString(); // 결과 금액
             let newPoints = parseInt(currentPoints) + parseInt(resultAmount); // 결과를 포함한 새로운 포인트

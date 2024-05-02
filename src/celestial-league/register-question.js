@@ -1,8 +1,9 @@
 const readSheet = require('./read-sheet.js');
 const writeSheet = require('./write-sheet.js');
+const logger = require('./logger');
 
 async function registerQuestion(data, o, chat) {
-    console.log("registering question");
+    logger.info("registering question");
 
     let message = data[o].message;
     let parsed_message = message.split(" ");
@@ -30,7 +31,7 @@ async function registerQuestion(data, o, chat) {
 
     questionData.push([lastRow, inputUserName, formattedDate, inputQuestion]);
 
-    console.log(questionData);
+    logger.info(questionData);
     await writeSheet(sheetName, startCell, endCell, questionData);
 
     await chat.send("질문이 등록되었습니다");

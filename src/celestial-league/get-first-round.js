@@ -1,7 +1,8 @@
 const readSheet = require('./read-sheet.js');
+const logger = require('./logger');
 
 async function getFirstRound(data, o, chat) {
-    console.log("getting first round result");
+    logger.info("getting first round result");
     let message = data[o].message;
 
     const sheetName = "상금분배시트";

@@ -3,6 +3,7 @@ const fs = require('fs').promises;
 const runCelestial = require("./src/celestial-league/run-celestial.js");
 const runFunction = require("./src/chat/run-function.js");
 const sendResponse = require("./src/chat/send-response.js");
+const logger = require('./logger');
 const checkAuthority = require("./src/util/check-authority.js");
 
 require("dotenv").config({ path: ".env" })
@@ -27,11 +28,11 @@ async function test (streamerName) {
     await chat.connect(); //채팅창 연결
 
     let recentChat = await chat.getRecentChat(); //최근 채팅 가져오기 (기본값 50개)
-    console.log(recentChat);
+    logger.info(recentChat);
 
     chat.onMessage(async (data) => { //채팅이 왔을 때
         for (let o in data) {
-            console.log(data[o].message);
+            logger.info(data[o].message);
 
             if (data[o].message === "!on") {
                 if (await checkAuthority(data, o, chat, streamerName)) {
@@ -61,9 +62,13 @@ async function test (streamerName) {
             }
        
             let userInfo = await chat.getUserInfo(data[o].author.id);
-        	console.log(userInfo); //채팅 보낸 유저의 정보
+        	logger.info(userInfo); //채팅 보낸 유저의 정보
         }
     });
 }
 
-test(streamerName);
+test("금성경");
+// test("일급천재");
+// test("캐피탈호");
+// test("병겜임");
+// test("해모수보컬");

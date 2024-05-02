@@ -18,6 +18,7 @@ const getBettingRate = require('./get-betting-rate.js');
 const { givePoint, takePoint } = require('./give-take.js');
 const betPoint = require('./bet-point.js');
 const settleBet = require('./settle-bet.js');
+const logger = require('./logger');
 let isBetting = false;
 
 async function runCelestial(data, o, chat) {

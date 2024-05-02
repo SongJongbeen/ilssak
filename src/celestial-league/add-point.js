@@ -1,8 +1,9 @@
 const readSheet = require('./read-sheet');
 const writeSheet = require('./write-sheet');
+const logger = require('./logger');
 
 async function addPoint(userName, point) {
-    console.log("adding point");
+    logger.info("adding point");
 
     // check if there is a userName in the sheet
     const sheetName = "포인트";
@@ -36,7 +37,7 @@ async function addPoint(userName, point) {
         await writeSheet(sheetName, startCell, endCell, pointData);
     }
 
-    console.log(`${userName}: ${pointData}`);
+    logger.info(`${userName}: ${pointData}`);
     return point;
 }
 
