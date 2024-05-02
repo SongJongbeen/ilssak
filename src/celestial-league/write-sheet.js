@@ -1,5 +1,5 @@
 const { google } = require('googleapis');
-const logger = require('./logger');
+const logger = require('./logger.js');
 const keys = require('../../celestial-league-key.json');
 require("dotenv").config({ path: ".env" })
 

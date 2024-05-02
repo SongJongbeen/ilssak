@@ -1,7 +1,7 @@
 const readSheet = require('./read-sheet.js');
 const writeSheet = require('./write-sheet.js');
 const addPoint = require('./add-point.js');
-const logger = require('./logger');
+const logger = require('./logger.js');
 
 async function getAttendance(data, o, chat) {
     logger.info("getting attendance");

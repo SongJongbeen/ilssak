@@ -1,5 +1,5 @@
 const readSheet = require('./read-sheet');
-const logger = require('./logger');
+const logger = require('./logger.js');
 
 async function getDelta(data, o, chat) {
     logger.info("getting delta");

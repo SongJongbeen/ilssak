@@ -1,4 +1,4 @@
-const logger = require('./logger');
+const logger = require('./logger.js');
 
 async function getSheetUrl(data, o, chat) {
     let parsed_message = message.split(" ");

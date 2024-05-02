@@ -1,6 +1,6 @@
 const readSheet = require('./read-sheet.js');
 const writeSheet = require('./write-sheet.js');
-const logger = require('./logger');
+const logger = require('./logger.js');
 
 async function buyTicket(data, o, chat) {
     logger.info("buying ticket");
