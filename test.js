@@ -3,6 +3,7 @@ const fs = require('fs').promises;
 const runCelestial = require("./src/celestial-league/run-celestial.js");
 const runFunction = require("./src/chat/run-function.js");
 const sendResponse = require("./src/chat/send-response.js");
+const checkAuthority = require("./src/util/check-authority.js");
 
 require("dotenv").config({ path: ".env" })
 
@@ -33,7 +34,7 @@ async function test (streamerName) {
             console.log(data[o].message);
 
             if (data[o].message === "!on") {
-                if (data[o].author.name === "금성경" || data[o].author.name === "일급천재" || data[o].author.name === "해모수보컬" || data[o].author.name === "캐피탈호") {
+                if (await checkAuthority(data, o, chat, streamerName)) {
                     if (isActive) { chat.send("일싹이가 이미 깨어있습니다"); return; } // 이미 활성화 되어있을 때 (중복 방지)
                     isActive = true;
                     chat.send("일싹이가 깨어났습니다!");
@@ -41,7 +42,7 @@ async function test (streamerName) {
             }
 
             if (data[o].message === "!off") {
-                if (data[o].author.name === "금성경" || data[o].author.name === "일급천재" || data[o].author.name === "해모수보컬" || data[o].author.name === "캐피탈호") {
+                if (await checkAuthority(data, o, chat, streamerName)) {
                     if (!isActive) { chat.send("일싹이가 이미 잠들어있습니다"); return; } // 이미 비활성화 되어있을 때 (중복 방지)
                     isActive = false;
                     chat.send("일싹이 자러갈게~");
@@ -49,13 +50,11 @@ async function test (streamerName) {
             }
 
             if (isActive) {
-                // if (streamerName === "일급천재") {    // 테스트중
-                if (streamerName === "금성경") {
+                if (streamerName === "일급천재") {
                     runCelestial(data, o, chat);
                 }
-    
+
                 else {
-                    streamerName = "해모수보컬";    // 테스트중
                     runFunction(data, o, chat, streamerName);
                     sendResponse(data, o, chat);
                 }

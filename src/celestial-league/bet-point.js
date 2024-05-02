@@ -11,6 +11,8 @@ async function betPoint(data, o, chat) {
     let playerName = parsed_message[1];
     let inputPoint = parsed_message[2];
 
+    if (parseInt(inputPoint) < 100) { await chat.send("100포인트 이상부터 응원할 수 있어요"); return; }
+
     if (playerName !== "1" && playerName !== "2" && playerName !== "3" && playerName !== "4") {
         await chat.send("결과를 선수번호(숫자)로 입력해주세요");
         return;

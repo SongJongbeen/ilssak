@@ -5,14 +5,15 @@ async function calculateScore(data, o, chat) {
     const scoreData = await readJson(scoreJson);
 
     const message = data[o].message;
+
+    if (message === "!점수") { return; }
+
     const parsed_message = message.split(" ");
     let isDealer = parsed_message[1]; if (isDealer === "친" || isDealer === "오야") { isDealer = "선"; }
     const han = parsed_message[2];
     let overMangan = false; if (han > 5) { overMangan = true; }
     let fu = "";
     let result = "";
-
-    if (message === "점수") { return; }
 
     if (!overMangan) { 
         fu = parsed_message[3]; 

@@ -7,7 +7,7 @@ async function addPoint(userName, point) {
     // check if there is a userName in the sheet
     const sheetName = "포인트";
     const startCell = "B3";
-    const endCell = "H500";
+    const endCell = "G500";
 
     let pointData = await readSheet(sheetName, startCell, endCell);
 
@@ -30,7 +30,7 @@ async function addPoint(userName, point) {
         lastRow = lastRow.toString();
         point = 1000;
 
-        let newPointData = [lastRow, userName, point, "", "", "+" + point, "0"];
+        let newPointData = [lastRow, userName, point, "", "", 0];
         pointData.push(newPointData);
 
         await writeSheet(sheetName, startCell, endCell, pointData);

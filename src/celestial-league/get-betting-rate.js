@@ -53,7 +53,7 @@ async function getBettingRate(data, o, chat) {
     if (fourthPlayerAmount === 0) { fourthPlayerRate = "0"; fourthPlayerResult = "-"; }
     else { fourthPlayerRate = (totalAmount / fourthPlayerAmount).toFixed(2); fourthPlayerResult = `1:${fourthPlayerRate}`; }
     
-    await chat.send(`응원 배당률: 1번 선수 (${firstPlayerResult}), 2번 선수 (${secondPlayerResult}), 3번 선수 (${thirdPlayerResult}), 4번 선수 (${fourthPlayerResult})`);
+    await chat.send(`응원현황: 1번 선수 (${firstPlayerResult}), 2번 선수 (${secondPlayerResult}), 3번 선수 (${thirdPlayerResult}), 4번 선수 (${fourthPlayerResult})`);
 }
 
 module.exports = getBettingRate;

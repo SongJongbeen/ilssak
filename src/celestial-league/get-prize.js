@@ -10,8 +10,8 @@ async function getPrize(data, o, chat) {
     const endCell = "F40";
     let prizeData = await readSheet(sheetName, startCell, endCell);
 
-    let prize = prizeData.find(row => row[0] === player)[4];
-    let result = `${player}의 누적상금: ${prize}원`;
+    let prize = prizeData.find(row => row[0] === player)[1];
+    let result = `${player}의 누적 대회상금: ${prize}원`;
     await chat.send(result);
 }
 
