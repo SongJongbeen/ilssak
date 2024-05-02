@@ -1,5 +1,5 @@
 const readSheet = require('./read-sheet.js');
-const logger = require('./logger');
+const logger = require('./logger.js');
 
 async function getThisWeek(data, o, chat) {
     logger.info("getting this week");

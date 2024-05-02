@@ -1,5 +1,5 @@
 const readSheet = require('./read-sheet');
-const logger = require('./logger');
+const logger = require('./logger.js');
 
 async function getBettingInfo(data, o, chat) {
     logger.info("getting betting info");

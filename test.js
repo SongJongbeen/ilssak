@@ -3,7 +3,7 @@ const fs = require('fs').promises;
 const runCelestial = require("./src/celestial-league/run-celestial.js");
 const runFunction = require("./src/chat/run-function.js");
 const sendResponse = require("./src/chat/send-response.js");
-const logger = require('./logger');
+const logger = require('./src/celestial-league/logger.js');
 const checkAuthority = require("./src/util/check-authority.js");
 
 require("dotenv").config({ path: ".env" })

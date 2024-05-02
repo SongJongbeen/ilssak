@@ -1,6 +1,6 @@
 const readSheet = require('./read-sheet');
 const writeSheet = require('./write-sheet');
-const logger = require('./logger');
+const logger = require('./logger.js');
 
 async function addPoint(userName, point) {
     logger.info("adding point");
