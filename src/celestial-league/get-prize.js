@@ -6,6 +6,8 @@ async function getPrize(data, o, chat) {
     let message = data[o].message;
     let player = message.split(" ")[1];
 
+    if (player === "") { await chat.send("선수명을 입력해주세요"); return; }
+
     const sheetName = "정산시트";
     const startCell = "B4";
     const endCell = "F40";

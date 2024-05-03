@@ -10,6 +10,8 @@ async function buyTicket(data, o, chat) {
     let parsedMessage = message.split(" ");
     let playerName = parsedMessage[1];
 
+    if (playerName === "") { await chat.send("슈참권을 선물할 선수를 입력해주세요"); return; }
+
     // check if there is a userName in the sheet
     const sheetName = "포인트";
     const startCell = "B3";
@@ -22,6 +24,7 @@ async function buyTicket(data, o, chat) {
     if (userPointData) {
         let userPointData = pointData.find(row => row[1] === userName);
         let currentPoint = userPointData[2];
+        currentPoint = parseInt(currentPoint);
 
         if (currentPoint < 10000) {
             await chat.send("포인트가 부족합니다");

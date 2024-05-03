@@ -7,12 +7,12 @@ async function getThisWeek(data, o, chat) {
     const userMessage = data[o].message;
 
     const sheetName = "이번주 출전 선수";
-    const startCell = "B4";
-    const endCell = "R7";
+    const startCell = "C4";
+    const endCell = "S7";
     let PersonalData = await readSheet(sheetName, startCell, endCell);
 
-    const AvgStartCell = "K9";
-    const AvgEndCell = "R10";
+    const AvgStartCell = "L9";
+    const AvgEndCell = "S10";
     let AvgData = await readSheet(sheetName, AvgStartCell, AvgEndCell);
 
     let participants = [PersonalData[0][0], PersonalData[1][0], PersonalData[2][0], PersonalData[3][0]];

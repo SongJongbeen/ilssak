@@ -15,6 +15,8 @@ async function getFirstRound(data, o, chat) {
     let thirdData = resultData.find(row => row[0] === "3");
     let fourthData = resultData.find(row => row[0] === "4");
 
+    if (firstData[2] === "") { await chat.send("아직 1회전 기록이 등록되지 않았어요!"); return; }
+
     const result = `1회전 결과: ${firstData[2]} (${firstData[1]}), ${secondData[2]} (${secondData[1]}), ${thirdData[2]} (${thirdData[1]}), ${fourthData[2]} (${fourthData[1]})`
     await chat.send(result);
 }

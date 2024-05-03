@@ -18,6 +18,10 @@ async function getAttendance(data, o, chat) {
 
     const formattedDate = `${year}${formattedMonth}${formattedDay}`;
 
+    const dayOfWeek = new Date(`${year}-${formattedMonth}-${formattedDay}`).getDay();
+
+    if (dayOfWeek !== 3) { await chat.send("출석체크는 혼천리그가 열리는 수요일에만 가능합니다!"); return; }
+
     const sheetName = "출석체크";
     const startCell = "B2";
     const endCell = "E1000";
