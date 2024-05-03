@@ -21,7 +21,6 @@ async function addPoint(userName, point) {
         let newPoint = currentPoint + point;
 
         userPointData[2] = newPoint.toString();
-        userPointData[5] = "+" + point;
 
         await writeSheet(sheetName, startCell, endCell, pointData);
     }

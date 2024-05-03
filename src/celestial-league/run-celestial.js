@@ -58,6 +58,7 @@ async function runCelestial(data, o, chat) {
         else if (message.startsWith("!1회전")) { await getFirstRound(data, o, chat); }
         else if (message.startsWith("!1경기")) { await getFirstRound(data, o, chat); }
         else if (message.startsWith("!출첵")) { await getAttendance(data, o, chat); }
+        else if (message.startsWith("!출석")) { await getAttendance(data, o, chat); }
         else if (message.startsWith("!구매")) { await buyTicket(data, o, chat); }
         else if (message.startsWith("!포인트")) { await getPoint(data, o, chat); }
         else if (message.startsWith("!등락")) { await getDelta(data, o, chat); }

@@ -1,7 +1,6 @@
 const readSheet = require('./read-sheet.js');
 const writeSheet = require('./write-sheet.js');
 const logger = require('./logger.js');
-const fs = require('fs');
 
 async function settleBet(data, o, chat) {
     logger.info("settling bet");
@@ -33,13 +32,6 @@ async function settleBet(data, o, chat) {
     let rateRecord = `[${dateStr}] 전체 베팅금액: ${rateData[0][0]}\n1번선수: ${rateData[1][0]}\n2번선수: ${rateData[2][0]}\n3번선수: ${rateData[3][0]}\n4번선수: ${rateData[4][0]}`;
 
     logger.info(rateRecord);
-
-    await fs.appendFile("src/celestial-league/records/rate-record.txt", rateRecord + "\n", "utf8", (err) => {
-        if (err) throw err;
-        logger.info("rate record saved");
-    });
-
-    logger.info(rateRecord);
     
     logger.info(winner);
 
@@ -59,11 +51,14 @@ async function settleBet(data, o, chat) {
     let totalCorrectAmount = 0;
 
     pointData.forEach(row => {
-        if (row[3] !== "") {
-            totalBetAmount += parseInt(row[4]);
-        }
-        if (row[3] === winner) {
-            totalCorrectAmount += parseInt(row[4]);
+        let betAmount = parseInt(row[4]);
+        if (!isNaN(betAmount)) {
+            if (row[3] !== "") {
+                totalBetAmount += betAmount;
+            }
+            if (row[3] === winner) {
+                totalCorrectAmount += betAmount;
+            }
         }
     })
 
@@ -71,7 +66,10 @@ async function settleBet(data, o, chat) {
     logger.info(`Total correct amount: ${totalCorrectAmount}`);
 
     pointData.forEach(row => {
-        row[5] = "-" + row[4].toString();
+        betAmount = parseInt(row[4]);
+        if (!isNaN(betAmount) && row[3] !== winner) {
+            row[5] = "-" + betAmount.toString();
+        }
     })
 
     pointData.forEach(row => {

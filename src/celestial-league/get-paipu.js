@@ -8,6 +8,8 @@ async function getPaipu(data, o, chat) {
     let playerName = "";
     try { playerName = message.split(" ")[2]; } catch { playerName = ""; }
 
+    if (week === "") { await chat.send("주차를 입력해주세요"); return; }
+
     // change playerName using ./players.json
     let players = require('./players.json');
     let player = players[playerName];

@@ -37,6 +37,9 @@ async function betPoint(data, o, chat) {
         let currentPoint = userPointData[2];
         logger.info(currentPoint);
 
+        currentPoint = parseInt(currentPoint);
+        inputPoint = parseInt(inputPoint);
+
         // check if the user has already bet
         if (userPointData[3] !== "") {
             currentPoint = parseInt(currentPoint) + parseInt(userPointData[4]);

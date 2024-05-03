@@ -12,6 +12,8 @@ async function registerQuestion(data, o, chat) {
     let inputQuestion = parsed_message.slice(1).join(" ");
     let inputUserName = data[o]["author"]["name"];
 
+    if (inputQuestion === "") { await chat.send("질문 내용을 입력해주세요"); return; }
+
     const dateStr = new Date().toLocaleString("en-US", {timeZone: "Asia/Seoul"});
     const [datePart] = dateStr.split(", ");
     const [month, day, year] = datePart.split("/");

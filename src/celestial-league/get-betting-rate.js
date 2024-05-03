@@ -1,5 +1,6 @@
 const readSheet = require('./read-sheet.js');
 const logger = require('./logger.js');
+const e = require('express');
 
 async function getBettingRate(data, o, chat) {
     message = data[o].message;
@@ -27,22 +28,21 @@ async function getBettingRate(data, o, chat) {
     let fourthPlayerResult = "";
 
     pointData.forEach(row => {
-        if (row[3] !== "") {
-            totalAmount += parseInt(row[4]);
-        }
-        if (row[3] === "1") {
-            firstPlayerAmount += parseInt(row[4]);
-        }
-        if (row[3] === "2") {
-            secondPlayerAmount += parseInt(row[4]);
-        }
-        if (row[3] === "3") {
-            thirdPlayerAmount += parseInt(row[4]);
-        }
-        if (row[3] === "4") {
-            fourthPlayerAmount += parseInt(row[4]);
+        let rowAmount = parseInt(row[4]);
+        if (!isNaN(rowAmount)) {
+            if (row[3] !== "") {
+                totalAmount += rowAmount;
+            }
+            if (row[3] === "1") { firstPlayerAmount += rowAmount; }
+            else if (row[3] === "2") { secondPlayerAmount += rowAmount; }
+            else if (row[3] === "3") { thirdPlayerAmount += rowAmount; }
+            else if (row[3] === "4") { fourthPlayerAmount += rowAmount; }
         }
     })
+
+    logger.info(`totalAmount: ${totalAmount}, firstPlayerAmount: ${firstPlayerAmount}, secondPlayerAmount: ${secondPlayerAmount}, thirdPlayerAmount: ${thirdPlayerAmount}, fourthPlayerAmount: ${fourthPlayerAmount}`)
+    logger.info(`firstPlayerRate: ${firstPlayerRate}, secondPlayerRate: ${secondPlayerRate}, thirdPlayerRate: ${thirdPlayerRate}, fourthPlayerRate: ${fourthPlayerRate}`)
+    logger.info(`firstPlayerResult: ${firstPlayerResult}, secondPlayerResult: ${secondPlayerResult}, thirdPlayerResult: ${thirdPlayerResult}, fourthPlayerResult: ${fourthPlayerResult}`)
 
     if (totalAmount === 0) { await chat.send("베팅된 금액이 없습니다"); return; }
     if (firstPlayerAmount === 0) { firstPlayerRate = "0"; firstPlayerResult = "-"; }

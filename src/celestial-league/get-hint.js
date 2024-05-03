@@ -9,7 +9,7 @@ async function getHint(data, o, chat) {
     let command = parsed_message[1];
 
     if (message === "!명령어") {
-        const commandLink = "https://drive.google.com/file/d/10dogw-bnTRddO-Lzcnbr8lm83hVPpr40/view?usp=sharing";
+        const commandLink = "https://drive.google.com/file/d/1Cp12O-IQx9utKb-aRW2FSvLOi2QkvaFY/view?usp=sharing";
         await chat.send(`명령어 모음: ${commandLink}`);
         return;
     }
