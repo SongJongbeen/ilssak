@@ -78,6 +78,7 @@ async function settleBet(data, o, chat) {
             let betAmount = parseInt(row[4]); // 베팅 금액
 
             let rewardAmount = Math.floor((betAmount / totalCorrectAmount) * totalBetAmount); // 보상 금액
+            rewardAmount = parseInt(rewardAmount);
             let deltaValue = rewardAmount - betAmount; // 변동 포인트
             deltaValue = "+" + deltaValue.toString();
 
