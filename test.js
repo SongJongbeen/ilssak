@@ -76,3 +76,4 @@ async function test (streamerName) {
 // test("캐피탈호");
 // test("병겜임");
 test("해모수보컬");
+    
