@@ -23,17 +23,11 @@ async function settleBet(data, o, chat) {
 
     const dateStr = new Date().toLocaleString("en-US", {timeZone: "Asia/Seoul"});
 
-    logger.info(dateStr);
-
     const sheetName = "포인트";
     let startCell = "J2";
     let endCell = "J6";
     let rateData = await readSheet(sheetName, startCell, endCell);
     let rateRecord = `[${dateStr}] 전체 베팅금액: ${rateData[0][0]}\n1번선수: ${rateData[1][0]}\n2번선수: ${rateData[2][0]}\n3번선수: ${rateData[3][0]}\n4번선수: ${rateData[4][0]}`;
-
-    logger.info(rateRecord);
-    
-    logger.info(winner);
 
     // change playerName using ./players.json
     let players = require('./players.json');
@@ -44,8 +38,6 @@ async function settleBet(data, o, chat) {
     endCell = "G500";
 
     let pointData = await readSheet(sheetName, startCell, endCell);
-
-    logger.info(pointData);
 
     let totalBetAmount = 0;
     let totalCorrectAmount = 0;

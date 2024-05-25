@@ -33,9 +33,7 @@ async function betPoint(data, o, chat) {
     let userPointData = pointData.find(row => row[1] === userName);
 
     if (userPointData) {
-        logger.info(inputPoint)
         let currentPoint = userPointData[2];
-        logger.info(currentPoint);
 
         currentPoint = parseInt(currentPoint);
         inputPoint = parseInt(inputPoint);
@@ -51,9 +49,9 @@ async function betPoint(data, o, chat) {
             return;
         }
         else {
-            userPointData[2] = currentPoint - inputPoint;
+            userPointData[2] = (currentPoint - inputPoint).toString();
             userPointData[3] = playerName;
-            userPointData[4] = inputPoint;
+            userPointData[4] = inputPoint.toString();
             userPointData[5] = "";
 
             await writeSheet(sheetName, startCell, endCell, pointData);

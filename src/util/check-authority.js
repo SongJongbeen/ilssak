@@ -10,3 +10,5 @@ async function checkAuthority(data, o, chat, streamerName) {
     if (streamerAuthority.includes(data[o].author.name)) { return true; } 
     else { return false; }
 }
+
+module.exports = checkAuthority;

@@ -27,7 +27,6 @@ async function writeSheet(sheetName, startCell, endCell, values) {
       }
     });
 
-    logger.info(`Data updated successfully in range ${range} on ${sheetName}`);
   } catch (err) {
     console.error('The API returned an error: ' + err);
   }

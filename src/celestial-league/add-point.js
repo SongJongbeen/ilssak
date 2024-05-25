@@ -36,7 +36,6 @@ async function addPoint(userName, point) {
         await writeSheet(sheetName, startCell, endCell, pointData);
     }
 
-    logger.info(`${userName}: ${pointData}`);
     return point;
 }
 

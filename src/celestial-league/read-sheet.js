@@ -25,8 +25,6 @@ async function readSheet(sheetName, startCell, endCell) {
 
     const rows = response.data.values;
     if (rows.length) {
-      logger.info('Data read from the spreadsheet:');
-      rows.map((row) => logger.info(row));
       return rows;
     } else {
       logger.info('No data found.');
