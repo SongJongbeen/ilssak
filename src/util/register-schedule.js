@@ -27,6 +27,8 @@ async function registerSchedule(data, o, chat, streamerName) {
     if (streamerName === "해모수보컬") { spreadsheetID = process.env.HMS_SPREADSHEET_ID; }
     else if (streamerName === "병겜임") { spreadsheetID = process.env.BGI_SPREADSHEET_ID; }
     else if (streamerName === "캐피탈호") { spreadsheetID = process.env.CAPITAL_SPREADSHEET_ID; }
+    else if (streamerName === "유키ㅡ") { spreadsheetID = process.env.YUKI_SPREADSHEET_ID; }
+    else if (streamerName === "금성경") { spreadsheetID = process.env.YUKI_SPREADSHEET_ID; }
 
     let scheduleData = await readSheet(sheetName, startCell, endCell, spreadsheetID);
 

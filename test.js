@@ -69,10 +69,11 @@ async function test (streamerName) {
             return;
         })
     });
-}
+}    
 
-// test("금성경");
 // test("일급천재");
 // test("캐피탈호");  
 // test("병겜임");
-test("해모수보컬");
+test("유키ㅡ");
+// test("해모수보컬");
+// test("금성경");
