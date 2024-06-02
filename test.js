@@ -5,8 +5,19 @@ const runFunction = require("./src/chat/run-function.js");
 const sendResponse = require("./src/chat/send-response.js");
 const logger = require('./src/celestial-league/logger.js');
 const checkAuthority = require("./src/util/check-authority.js");
+const { run } = require("googleapis/build/src/apis/run/index.js");
 
 require("dotenv").config({ path: ".env" })
+
+process.on('uncaughtException', (err) => {  
+    if (err.message.includes('[WS] Disconnect!')) {
+      console.error('Disconnected! Restarting tests...');
+      runTests();
+    } else {
+      console.error(err);
+      process.exit(1);
+    }
+});
 
 buzzk.login(process.env.NID_AUT, process.env.NID_SES); //로그인
 
@@ -64,16 +75,28 @@ async function test (streamerName) {
         	logger.info(userInfo); //채팅 보낸 유저의 정보
         }
 
-        chat.onDisconnect(async () => {
-            logger.info("방송과 연결이 끊겨 일싹이가 잠듭니다");
-            return;
-        })
+        // chat.onDisconnect(async () => {
+        //     logger.info("방송과 연결이 끊겨 일싹이가 잠듭니다");
+        //     return;
+        // })  
     });
 }    
 
 // test("일급천재");
 // test("캐피탈호");  
 // test("병겜임");
-test("유키ㅡ");
+// test("유키ㅡ");
 // test("해모수보컬");
 // test("금성경");
+              
+
+
+const streamerNames = ["캐피탈호", "병겜임", "유키ㅡ", "금성경", "해모수보컬"];
+
+async function runTests() {
+    const promises = streamerNames.map(name => test(name));
+    await Promise.all(promises);
+    console.log("All tests are done!")
+}
+
+runTests();
