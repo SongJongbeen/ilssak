@@ -7,6 +7,8 @@ async function calculateScore(data, o, chat) {
     const message = data[o].message;
 
     if (message === "!점수") { return; }
+    if (message === "!점수 루빙") { return; }
+    if (message === "!점수 루빙2") { return; }
 
     try {
         const parsed_message = message.split(" ");
@@ -23,13 +25,13 @@ async function calculateScore(data, o, chat) {
         else {
             result = `(쯔모) ${scoreData[isDealer]["쯔모"][han]}점 / (론) ${scoreData[isDealer]["론"][han]}점 입니다`;
         }
+
+        await chat.send(result);
     }
     catch (error) {
         console.error(error);
         await chat.send("명령어 실행 중 오류가 발생했습니다");
     }
-    
-    await chat.send(result);
 }
 
 module.exports = calculateScore;

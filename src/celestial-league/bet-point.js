@@ -1,6 +1,8 @@
 const readSheet = require('./read-sheet.js');
 const writeSheet = require('./write-sheet.js');
 const logger = require('./logger.js');
+const { Mutex } = require('async-mutex');
+const mutex = new Mutex();
 
 async function betPoint(data, o, chat) {
     logger.info("betting point");
@@ -19,6 +21,8 @@ async function betPoint(data, o, chat) {
         return;
     }
 
+    if (inputPoint === undefined | inputPoint === null) { await chat.send("포인트를 입력해주세요"); return; }
+
     // change playerName using ./players.json
     let players = require('./players.json');
     let player = players[playerName];
@@ -34,32 +38,51 @@ async function betPoint(data, o, chat) {
 
     if (userPointData) {
         let currentPoint = userPointData[2];
+        if (currentPoint === undefined && isNaN(currentPoint))
+            { await chat.send(`${playerName}님 다시 시도해주세요`) }
+    }
+
+    if (userPointData) {
+        let currentPoint = userPointData[2];
 
         currentPoint = parseInt(currentPoint);
         inputPoint = parseInt(inputPoint);
 
         // check if the user has already bet
-        if (userPointData[3] !== "") {
-            currentPoint = parseInt(currentPoint) + parseInt(userPointData[4]);
+        if (!isNaN(userPointData[3]) && userPointData[3] !== undefined && userPointData[3] !== "" && userPointData[3] !== null) {
+            if (!isNaN(userPointData[4]) && userPointData[4] !== undefined && userPointData[4] !== "" && userPointData[4] !== null) {
+                currentPoint = parseInt(currentPoint) + parseInt(userPointData[4]);
+            }
             userPointData[2] = currentPoint;
         }
 
-        if (currentPoint < inputPoint) {
-            await chat.send("포인트가 부족합니다");
-            return;
-        }
-        else {
-            userPointData[2] = (currentPoint - inputPoint).toString();
-            userPointData[3] = playerName;
-            userPointData[4] = inputPoint.toString();
-            userPointData[5] = "";
+        const release = await mutex.acquire();
+        currentPoint = parseInt(currentPoint);
+        inputPoint = parseInt(inputPoint);
 
-            await writeSheet(sheetName, startCell, endCell, pointData);
-            await chat.send(`${playerName}번 선수를 ${inputPoint}포인트만큼 응원해요`);
+        console.log(currentPoint, inputPoint);
+
+        try {
+            if (currentPoint < inputPoint) {
+                await chat.send("포인트가 부족합니다");
+                return;
+            }
+            else {
+                userPointData[2] = (currentPoint - inputPoint).toString();
+                userPointData[3] = playerName;
+                userPointData[4] = inputPoint.toString();
+                userPointData[5] = "";
+
+                await writeSheet(sheetName, startCell, endCell, pointData);
+                await chat.send(`${userName} 응원 완료!`);
+            }
+        }
+        finally {
+            release();
         }
     }
     else {
-        await chat.send("등록된 계정이 없습니다. 닉네임을 변경하셨다면 관리자에게 문의해주세요")
+        await chat.send("등록된 계정이 없습니다. 닉네임을 변경하셨다면 관리자에게 문의해주세요")  
     }
 }
 

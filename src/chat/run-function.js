@@ -30,7 +30,7 @@ async function runFunction(data, o, chat, streamerName) {
         if (message.startsWith("!패보")) { await registerPaipu(data, o, chat, streamerName); }
         else if (message.startsWith("!질문")) { await registerQuestion(data, o, chat, streamerName); }
         else if (message.startsWith("!스케줄")) { await registerSchedule(data, o, chat, streamerName); }
-        else if (message.startsWith("!일정")) { await registerWeeklySchedule(data, o, chat, streamerName); }
+        // else if (message.startsWith("!일정")) { await registerWeeklySchedule(data, o, chat, streamerName); }
         else if (message.startsWith("!명령어")) { await registerCommand(data, o, chat); }
         else if (message.startsWith("!패효율")) { calculateEfficiency(data, o, chat); }
         else if (message.startsWith("!점수")) { calculateScore(data, o, chat); }
