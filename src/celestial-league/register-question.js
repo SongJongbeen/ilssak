@@ -33,7 +33,6 @@ async function registerQuestion(data, o, chat) {
 
     questionData.push([lastRow, inputUserName, formattedDate, inputQuestion]);
 
-    logger.info(questionData);
     await writeSheet(sheetName, startCell, endCell, questionData);
 
     await chat.send("질문이 등록되었습니다");

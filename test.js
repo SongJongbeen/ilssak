@@ -89,7 +89,7 @@ async function test (streamerName) {
 // test("해모수보컬");
 // test("금성경");
                              
-
+            
 
 const streamerNames = ["병겜임", "유키ㅡ", "금성경", "해모수보컬"];
 
@@ -98,6 +98,6 @@ async function runTests() {
     await Promise.all(promises);
     console.log("All tests are done!")
 }
-   
+
 runTests();
-  
+ 

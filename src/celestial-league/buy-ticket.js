@@ -44,7 +44,6 @@ async function buyTicket(data, o, chat) {
 
         ticketData.push([lastRow, userName, playerName, "false"]);
 
-        logger.info(ticketData)
         await writeSheet(ticketSheetName, ticketStartCell, ticketEndCell, ticketData);
         await chat.send(`${userName}님이 ${playerName}선수의 슈퍼참여권을 구매하였습니다`)
     }

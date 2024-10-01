@@ -51,7 +51,6 @@ async function getAttendance(data, o, chat) {
 
         attendanceData.push([lastRow, userName, formattedDate, point]);
 
-        logger.info(attendanceData);
         await writeSheet(sheetName, startCell, endCell, attendanceData);
 
         await chat.send(`${userName}님 출석체크 완료!`);

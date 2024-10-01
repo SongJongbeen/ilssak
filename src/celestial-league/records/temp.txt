@@ -1,0 +1,91 @@
+  [
+    "1235",
+    "Fung",
+    "20240710",
+    "100"
+  ],
+  [
+    "1236",
+    "거무별",
+    "20240710",
+    "100"
+  ],
+  [
+    "1237",
+    "래튼",
+    "20240710",
+    "100"
+  ],
+  [
+    "1238",
+    "DEMATH",
+    "20240710",
+    "100"
+  ],
+  [
+    "1239",
+    "미나세 이오리",
+    "20240710",
+    "100"
+  ],
+  [
+    "1240",
+    "와타메에",
+    "20240710",
+    "100"
+  ],
+  [
+    "1241",
+    "Qwertyowo",
+    "20240710",
+    "100"
+  ],
+  [
+    "1242",
+    "루빙2",
+    "20240717",
+    "100"
+  ],
+  [
+    "1243",
+    "람월",
+    "20240717",
+    "100"
+  ],
+  [
+    "1244",
+    "달빛의밤",
+    "20240717",
+    "100"
+  ],
+  [
+    "1245",
+    "야옹이는고양",
+    "20240717",
+    100
+  ]
+]
+2024-07-17T12:59:37.657Z info: {
+  "channelID": "a133e6ff225b1941a927282ec378eb77",
+  "name": "잭슨5",
+  "imageURL": "https://nng-phinf.pstatic.net/MjAyMjAyMjJfMjM4/MDAxNjQ1NTE1Njk3ODAy.LvJNu02k7eo5YatKfTGlTBLLhcjypf1UqOybzFSb7ugg.GfRNmvSWuw3VPJiYyilDjrvoIlqnXDL4XgR7rGXTOCAg.JPEG/IMG_20220219_210412_728.jpg",
+  "role": "common_user",
+  "followDate": "2024-06-11 00:05:58"
+}
+2024-07-17T12:59:38.298Z info: getting attendance
+2024-07-17T12:59:38.542Z info: 야옹이는고양님 출석체크 완료!
+2024-07-17T12:59:38.543Z info: !출첵
+2024-07-17T12:59:38.591Z info: {
+  "channelID": "7315d5eb00a18fc3576d47161e1360fb",
+  "name": "일싹이",
+  "imageURL": "https://nng-phinf.pstatic.net/MjAyNDA1MDZfMjcz/MDAxNzE0OTIzNTY5OTE3.S9A14gQHnLVkk149E0mJd6sFXELF66_I-Ev5zhvG1G0g.vR8afzYiB6BrOQ_Vafrx897s9zqoGqHWg1rPS1dR7OQg.JPEG/%EC%9D%BC%EC%8B%B9%EC%9D%B4_%EB%BD%80%EC%83%B5.jpg",
+  "role": "streaming_chat_manager",
+  "followDate": "2024-05-02 00:15:05"
+}
+2024-07-17T12:59:38.596Z info: {
+  "channelID": "dac940359b556a3b4370b72eaa9c5515",
+  "name": "롤하",
+  "imageURL": null,
+  "role": "common_user",
+  "followDate": "2024-01-05 00:24:02"
+}
