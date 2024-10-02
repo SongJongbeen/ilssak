@@ -7,7 +7,7 @@ async function getBettingRate(data, o, chat) {
 
     const sheetName = "포인트";
     const startCell = "B4";
-    const endCell = "G500";
+    const endCell = "G5000";
 
     let pointData = await readSheet(sheetName, startCell, endCell);
 

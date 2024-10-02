@@ -35,7 +35,7 @@ async function settleBet(data, o, chat) {
     if (player) { winner = player; }
 
     startCell = "B4";
-    endCell = "G500";
+    endCell = "G5000";
 
     let pointData = await readSheet(sheetName, startCell, endCell);
 

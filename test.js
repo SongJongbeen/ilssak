@@ -82,7 +82,7 @@ async function test (streamerName) {
     });
 }    
 
-// test("일급천재");
+test("일급천재");
 // test("캐피탈호");
 // test("병겜임");
 // test("유키ㅡ");
@@ -91,13 +91,13 @@ async function test (streamerName) {
                              
             
 
-const streamerNames = ["병겜임", "유키ㅡ", "금성경", "해모수보컬"];
+// const streamerNames = ["병겜임", "유키ㅡ", "금성경", "해모수보컬"];
 
-async function runTests() {
-    const promises = streamerNames.map(name => test(name));
-    await Promise.all(promises);
-    console.log("All tests are done!")
-}
+// async function runTests() {
+//     const promises = streamerNames.map(name => test(name));
+//     await Promise.all(promises);
+//     console.log("All tests are done!")
+// }
 
-runTests();
+// runTests();
  

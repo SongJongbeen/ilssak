@@ -17,7 +17,7 @@ async function getPaipu(data, o, chat) {
 
     const sheetName = "패보";
     const startCell = "U2";
-    const endCell = "X800";
+    const endCell = "X5000";
     let paipuData = await readSheet(sheetName, startCell, endCell);
 
     let result = paipuData.filter(row => row[0] === week);

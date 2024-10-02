@@ -15,7 +15,7 @@ async function buyTicket(data, o, chat) {
     // check if there is a userName in the sheet
     const sheetName = "포인트";
     const startCell = "B3";
-    const endCell = "H500";
+    const endCell = "H5000";
 
     let pointData = await readSheet(sheetName, startCell, endCell);
 

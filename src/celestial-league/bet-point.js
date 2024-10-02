@@ -30,7 +30,7 @@ async function betPoint(data, o, chat) {
 
     let sheetName = "포인트";
     let startCell = "B3";
-    let endCell = "G500";
+    let endCell = "G5000";
 
     let pointData = await readSheet(sheetName, startCell, endCell);
 

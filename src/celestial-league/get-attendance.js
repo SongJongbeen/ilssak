@@ -29,16 +29,22 @@ async function getAttendance(data, o, chat) {
 
         const sheetName = "출석체크";
         const startCell = "B2";
-        const endCell = "E2000";
+        const endCell = "E5000";
         let attendanceData = await readSheet(sheetName, startCell, endCell);
 
         let lastRow = attendanceData.length;
         lastRow = lastRow.toString();
 
         let isAlreadyChecked = false;
+        let hasCheckedBefore = false;
+        let point = 100;
+
         for (let i = 0; i < attendanceData.length; i++) {
             if (attendanceData[i][1] === userName && attendanceData[i][2] === formattedDate) {
                 isAlreadyChecked = true;
+            }
+            if (attendanceData[i][1] === userName) {
+                hasCheckedBefore = true;
             }
         }
 
@@ -47,7 +53,12 @@ async function getAttendance(data, o, chat) {
             return;
         }
 
-        let point = await addPoint(userName, 100);
+        if (hasCheckedBefore) {
+            point = await addPoint(userName, 100);
+        }
+        else {
+            point = await addPoint(userName, 1000);
+        }
 
         attendanceData.push([lastRow, userName, formattedDate, point]);
 

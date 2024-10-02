@@ -11,7 +11,7 @@ async function getBettingInfo(data, o, chat) {
     // check if there is a userName in the sheet
     const sheetName = "포인트";
     const startCell = "B3";
-    const endCell = "G500";
+    const endCell = "G5000";
 
     let pointData = await readSheet(sheetName, startCell, endCell);
 
@@ -25,7 +25,7 @@ async function getBettingInfo(data, o, chat) {
     }
 
     else {
-        await chat.send("등록된 계정이 없습니다. 닉네임을 변경하셨다면 관리자에게 문의해주세요");
+        await chat.send("등록된 계정이 없습니다. 출첵한 적이 없다면 !출첵, 닉변 및 오류는 개발자를 불러주세요!");
     }
 }
 
