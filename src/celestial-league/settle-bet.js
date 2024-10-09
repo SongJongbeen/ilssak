@@ -64,6 +64,21 @@ async function settleBet(data, o, chat) {
         }
     })
 
+    betRatio = 0.00;
+
+    if (winner == "1") {
+        betRatio = 4.96;
+    }
+    else if (winner == "2") {
+        betRatio = 8.27;
+    }
+    else if (winner == "3") {
+        betRatio = 10.54;
+    }
+    else if (winner == "4") {
+        betRatio = 5.74;
+    }
+
     pointData.forEach(row => {
         if (row[3] == winner) {
             let currentPoints = parseInt(row[2]); // 현재 보유 포인트
@@ -71,6 +86,10 @@ async function settleBet(data, o, chat) {
 
             let rewardAmount = Math.floor((betAmount / totalCorrectAmount) * totalBetAmount); // 보상 금액
             rewardAmount = parseInt(rewardAmount);
+            // 배당률로 지급
+            rewardAmount = betAmount * betRatio;
+            rewardAmount = parseInt(rewardAmount);
+
             let deltaValue = rewardAmount - betAmount; // 변동 포인트
             deltaValue = "+" + deltaValue.toString();
 

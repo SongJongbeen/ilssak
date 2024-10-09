@@ -28,7 +28,7 @@ async function getAttendance(data, o, chat) {
         if (dayOfWeek !== 3) { await chat.send("출석체크는 혼천리그가 열리는 수요일에만 가능합니다!"); return; }
 
         const sheetName = "출석체크";
-        const startCell = "B2";
+        const startCell = "B3";
         const endCell = "E5000";
         let attendanceData = await readSheet(sheetName, startCell, endCell);
 
