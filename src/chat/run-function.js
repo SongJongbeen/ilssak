@@ -22,6 +22,7 @@ const callRon = require('../mahjong/call-ron.js');
 const sakuraGacha = require('../mahjong/sakura-gacha.js');
 const bambooGacha = require('../mahjong/bamboo-gacha.js');
 const collabo = require('../mahjong/collabo.js');
+const askGPT = require('../util/ask-gpt.js');
 
 async function runFunction(data, o, chat, streamerName) {
     message = data[o].message;

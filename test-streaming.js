@@ -6,6 +6,8 @@ const sendResponse = require("./src/chat/send-response.js");
 const logger = require('./src/celestial-league/logger.js');
 const checkAuthority = require("./src/util/check-authority.js");
 const { run } = require("googleapis/build/src/apis/run/index.js");
+const hmsCharacterGacha = require("./src/mahjong/hms-character-gacha.js");
+const askGPT = require("./src/util/ask-gpt.js");
 
 require("dotenv").config({ path: ".env" })
 
@@ -39,6 +41,25 @@ async function test (streamerName) {
 
     let recentChat = await chat.getRecentChat(); //최근 채팅 가져오기 (기본값 50개)
     logger.info(recentChat);
+
+    chat.onDonation(async (data) => {
+        for (let o in data) {
+
+            logger.info(data[o].message);
+
+            if (streamerName === "해모수보컬") {
+                if (data[o].message === "!캐릭터") {
+                    await hmsCharacterGacha(chat);
+                }
+            }
+
+            if (streamerName === "해모수보컬") {
+                if (data[o].message.startsWith("!GPT")) { await askGPT(data, o, chat); }
+                else if (data[o].message.startsWith("!gpt")) { await askGPT(data, o, chat); }
+            }
+        }   
+    });
+    
 
     chat.onMessage(async (data) => { //채팅이 왔을 때
         for (let o in data) {

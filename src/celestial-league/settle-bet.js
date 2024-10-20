@@ -1,6 +1,7 @@
 const readSheet = require('./read-sheet.js');
 const writeSheet = require('./write-sheet.js');
 const logger = require('./logger.js');
+const { log } = require('winston');
 
 async function settleBet(data, o, chat) {
     logger.info("settling bet");
@@ -67,16 +68,16 @@ async function settleBet(data, o, chat) {
     betRatio = 0.00;
 
     if (winner == "1") {
-        betRatio = 4.96;
+        betRatio = parseFloat(rateData[1][0]);
     }
     else if (winner == "2") {
-        betRatio = 8.27;
+        betRatio = parseFloat(rateData[2][0]);
     }
     else if (winner == "3") {
-        betRatio = 10.54;
+        betRatio = parseFloat(rateData[3][0]);
     }
     else if (winner == "4") {
-        betRatio = 5.74;
+        betRatio = parseFloat(rateData[4][0]);
     }
 
     pointData.forEach(row => {
@@ -84,11 +85,12 @@ async function settleBet(data, o, chat) {
             let currentPoints = parseInt(row[2]); // 현재 보유 포인트
             let betAmount = parseInt(row[4]); // 베팅 금액
 
-            let rewardAmount = Math.floor((betAmount / totalCorrectAmount) * totalBetAmount); // 보상 금액
-            rewardAmount = parseInt(rewardAmount);
+            // let rewardAmount = Math.floor((betAmount / totalCorrectAmount) * totalBetAmount); // 보상 금액
+            // rewardAmount = parseInt(rewardAmount);
             // 배당률로 지급
+            let rewardAmount = 0;
             rewardAmount = betAmount * betRatio;
-            rewardAmount = parseInt(rewardAmount);
+            rewardAmount = parseFloat(rewardAmount);
 
             let deltaValue = rewardAmount - betAmount; // 변동 포인트
             deltaValue = "+" + deltaValue.toString();
