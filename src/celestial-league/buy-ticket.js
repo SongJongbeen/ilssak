@@ -26,12 +26,12 @@ async function buyTicket(data, o, chat) {
         let currentPoint = userPointData[2];
         currentPoint = parseInt(currentPoint);
 
-        if (currentPoint < 10000) {
+        if (currentPoint < 100000) {
             await chat.send("포인트가 부족합니다");
             return;
         }
         else {
-            userPointData[2] = currentPoint - 10000;
+            userPointData[2] = currentPoint - 100000;
             await writeSheet(sheetName, startCell, endCell, pointData);
         }
 

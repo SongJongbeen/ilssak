@@ -11,15 +11,25 @@ const askGPT = require("./src/util/ask-gpt.js");
 
 require("dotenv").config({ path: ".env" })
 
-process.on('uncaughtException', (err) => {  
-    if (err.message.includes('[WS] Disconnect!')) {
-      console.error('Disconnected! Restarting tests...');
-      runTests();
-    } else {
-      console.error(err);
-      process.exit(1);
-    }
-});
+// process.on('uncaughtException', (err) => {  
+//     if (err.message.includes('[WS] Disconnect!')) {
+//       console.error('Disconnected! Restarting tests...');
+//       runTests();
+//     } else {
+//       console.error(err);
+//       process.exit(1);
+//     }
+// });
+
+// // run test() function every 4am KST  
+// const schedule = require('node-schedule');
+// const rule = new schedule.RecurrenceRule();
+// rule.hour = 20;
+
+// schedule.scheduleJob(rule, function() {
+//     console.log('Running tests at 4am KST');
+//     runTests();
+// });
 
 buzzk.login(process.env.NID_AUT, process.env.NID_SES); //로그인
 
@@ -33,7 +43,7 @@ async function test (streamerName) {
     
     let channel = chSearch[0]; //검색 결과 첫번째 채널
 
-    const lvDetail = await buzzk.live.getDetail(channel.channelID); //현재 방송 정보
+    const lvDetail = await buzzk.live.getDetail(channel.channelID); //현재 방송 정보 - migrated
     logger.info(lvDetail);
 
     let chat = new buzzkChat(channel.channelID);
@@ -43,8 +53,8 @@ async function test (streamerName) {
     logger.info(recentChat);
 
     chat.onDonation(async (data) => {
-        for (let o in data) {
 
+        for (let o in data) {
             logger.info(data[o].message);
 
             if (streamerName === "해모수보컬") {
@@ -53,7 +63,8 @@ async function test (streamerName) {
                 }
             }
 
-            if (streamerName === "해모수보컬") {
+            // if streamerName is "해모수보컬" or "유키"
+            if (streamerName === "해모수보컬" || streamerName === "유키ㅡ") {
                 if (data[o].message.startsWith("!GPT")) { await askGPT(data, o, chat); }
                 else if (data[o].message.startsWith("!gpt")) { await askGPT(data, o, chat); }
             }
@@ -64,6 +75,10 @@ async function test (streamerName) {
     chat.onMessage(async (data) => { //채팅이 왔을 때
         for (let o in data) {
             logger.info(data[o].message);
+
+            if (data[o].message.startsWith("!gpt")) {
+                if (await checkAuthority(data, o, chat, streamerName)) { await askGPT(data, o, chat); }
+            }
 
             if (data[o].message === "!on") {
                 if (await checkAuthority(data, o, chat, streamerName)) {
@@ -110,14 +125,16 @@ async function test (streamerName) {
 // test("해모수보컬");
 // test("금성경");
                              
-            
+// get streamer name as input and run test() function
+// const streamerName = process.argv[2];
+// test(streamerName);
 
-const streamerNames = ["병겜임", "유키ㅡ", "금성경", "해모수보컬"];
+// const streamerNames = ["병겜임", "유키ㅡ", "금성경", "해모수보컬"];
 
-async function runTests() {
-    const promises = streamerNames.map(name => test(name));
-    await Promise.all(promises);
-    console.log("All tests are done!")
-}
+// async function runTests() {
+//     const promises = streamerNames.map(name => test(name));
+//     await Promise.all(promises);
+//     console.log("All tests are done!")
+// }
 
-runTests();
+// runTests();

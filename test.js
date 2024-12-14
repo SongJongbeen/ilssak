@@ -9,15 +9,15 @@ const { run } = require("googleapis/build/src/apis/run/index.js");
 
 require("dotenv").config({ path: ".env" })
 
-process.on('uncaughtException', (err) => {  
-    if (err.message.includes('[WS] Disconnect!')) {
-      console.error('Disconnected! Restarting tests...');
-      runTests();
-    } else {
-      console.error(err);
-      process.exit(1);
-    }
-});
+// process.on('uncaughtException', (err) => {  
+//     if (err.message.includes('[WS] Disconnect!')) {
+//       console.error('Disconnected! Restarting tests...');
+//       runTests();
+//     } else {
+//       console.error(err);
+//       process.exit(1);
+//     }
+// });
 
 buzzk.login(process.env.NID_AUT, process.env.NID_SES); //로그인
 
@@ -25,7 +25,7 @@ const buzzkChat = buzzk.chat;
 
 async function test (streamerName) {
 
-    let isActive = true; //활성화 여부
+    let isActive = false; //활성화 여부
 
     let chSearch = await buzzk.channel.search(streamerName); //채널 검색
     

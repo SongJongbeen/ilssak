@@ -54,7 +54,7 @@ async function getAttendance(data, o, chat) {
         }
 
         if (hasCheckedBefore) {
-            point = await addPoint(userName, 100);
+            point = await addPoint(userName, 1000);
         }
         else {
             point = await addPoint(userName, 1000);

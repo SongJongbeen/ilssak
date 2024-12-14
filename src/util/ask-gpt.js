@@ -10,9 +10,9 @@ async function callOpenAI(userInput) {
     console.log("message: ", userInput);
     try {
         const response = await openai.chat.completions.create({
-            model: 'gpt-4o-mini',
+            model: 'gpt-4o',
             messages: [
-                { role: 'system', content: "You are an helpful assistant. You MUST answer in 200 characters in Korean." },
+                { role: 'system', content: "You are an helpful assistant in a Riichi Mahjong streaming. You MUST answer in 200 characters in Korean." },
                 { role: 'user', content: userInput }
             ]
         });
