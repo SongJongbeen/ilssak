@@ -123,7 +123,7 @@ async function test (streamerName) {
 // test("병겜임");
 // test("유키ㅡ");
 // test("해모수보컬");
-// test("금성경");
+test("금성경");
                              
 // get streamer name as input and run test() function
 // const streamerName = process.argv[2];

@@ -23,6 +23,7 @@ const sakuraGacha = require('../mahjong/sakura-gacha.js');
 const bambooGacha = require('../mahjong/bamboo-gacha.js');
 const collabo = require('../mahjong/collabo.js');
 const askGPT = require('../util/ask-gpt.js');
+const calculateRankPoint = require('../mahjong/calculate-rank-point.js');
 
 async function runFunction(data, o, chat, streamerName) {
     message = data[o].message;
@@ -52,6 +53,7 @@ async function runFunction(data, o, chat, streamerName) {
         else if (message.startsWith("!벚꽃의길")) { await sakuraGacha(chat); }
         else if (message.startsWith("!콜라보")) { await collabo(chat); }
         else if (message.startsWith("!죽림의길")) { await bambooGacha(chat); }
+        else if (message.startsWith("!기록")) { await calculateRankPoint(data, o, chat, streamerName); }
         else { return; }
     }
     catch (err) { console.error(err); await chat.send("명령어 실행중 오류가 발생했습니다"); return; }
