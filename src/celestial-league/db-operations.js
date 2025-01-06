@@ -45,8 +45,6 @@ async function createUser(userName) {
             action: 'create',
             user_name: userName,
             current_point: 1000,  // 초기 포인트
-            betting_player: NULL,
-            betting_point: 0,
             last_attendance: new Date().toISOString().split('T')[0]
         })
     }).then(r => r.json());
@@ -54,15 +52,22 @@ async function createUser(userName) {
 
 // 포인트 업데이트
 async function updatePoints(userName, pointChange) {
-    return await fetch(`${API_BASE_URL}/db-api.php`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            action: 'updatePoints',
-            user_name: userName,
-            point_change: pointChange
-        })
-    }).then(r => r.json());
+    try {
+        const response = await fetch(`${API_BASE_URL}/db-api.php`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                action: 'updatePoints',
+                user_name: userName,      // user_id가 아닌 user_name 사용
+                point_change: pointChange
+            })
+        });
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('포인트 업데이트 에러:', error);
+        throw error;
+    }
 }
 
 // 출석 체크 및 보상
