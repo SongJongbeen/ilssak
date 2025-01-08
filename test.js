@@ -61,7 +61,7 @@ async function test (streamerName) {
             }
 
             if (isActive) {
-                if (streamerName === "일급천재") {
+                if (streamerName === "금성경") {
                     runCelestial(data, o, chat);
                 }
 
@@ -82,7 +82,7 @@ async function test (streamerName) {
     });
 }    
 
-test("일급천재");
+test("금성경");
 // test("캐피탈호");
 // test("병겜임");
 // test("유키ㅡ");

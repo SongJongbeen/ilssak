@@ -31,7 +31,7 @@ async function getBettingRate(data, o, chat) {
         logger.info(`전체 포인트: ${totalPoints}, 배당률: ${odds.join(', ')}`);
 
         await chat.send(
-            `현재 배당률:\n` +
+            `현재 응원률:\n` +
             `1번 선수: ${odds[0]}배 (${playerPoints[0]}P)\n` +
             `2번 선수: ${odds[1]}배 (${playerPoints[1]}P)\n` +
             `3번 선수: ${odds[2]}배 (${playerPoints[2]}P)\n` +
