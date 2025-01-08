@@ -1,3 +1,5 @@
+// deprecated
+
 const readSheet = require('./read-sheet');
 const writeSheet = require('./write-sheet');
 const logger = require('./logger.js');

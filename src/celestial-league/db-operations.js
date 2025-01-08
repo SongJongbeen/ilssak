@@ -82,5 +82,62 @@ async function checkAttendance(userName) {
     }).then(r => r.json());
 }
 
+// 베팅 정보 업데이트
+async function updateBetting(userName, playerNumber, bettingPoint) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/db-api.php`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                action: 'updateBetting',
+                user_name: userName,
+                betting_player: playerNumber,
+                betting_point: bettingPoint
+            })
+        });
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('베팅 업데이트 에러:', error);
+        throw error;
+    }
+}
 
-module.exports = { getUsersAll, getUserByName, getUserByID, createUser, updatePoints, checkAttendance };
+// 베팅 정보 초기화 (정산 후 사용)
+async function resetBetting(userName) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/db-api.php`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                action: 'resetBetting',
+                user_name: userName
+            })
+        });
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('베팅 초기화 에러:', error);
+        throw error;
+    }
+}
+
+// 모든 베� 정보 조회
+async function getAllBettings() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/db-api.php`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                action: 'getAllBettings'
+            })
+        });
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('베팅 정보 조회 에러:', error);
+        throw error;
+    }
+}
+
+module.exports = { getUsersAll, getUserByName, getUserByID, createUser, updatePoints, checkAttendance, updateBetting, resetBetting, getAllBettings };
