@@ -13,8 +13,9 @@ async function calculateScore(data, o, chat) {
     try {
         const parsed_message = message.split(" ");
         let isDealer = parsed_message[1]; if (isDealer === "친" || isDealer === "오야") { isDealer = "선"; }
-        const han = parsed_message[2];
-        let overMangan = false; if (han > 5) { overMangan = true; }
+        let han = parsed_message[2];
+        let overMangan = false; if (parseInt(han) >= 5) { overMangan = true; }
+        if (parseInt(han) >= 13) { han = 13; }
         let fu = "";
         let result = "";
 

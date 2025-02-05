@@ -1,6 +1,6 @@
 const logger = require('./logger.js');
 const { Mutex } = require('async-mutex');
-const { getUserByName, checkAttendance } = require('./db-operations.js');
+const { getUserByName, createUser, checkAttendance } = require('./db-operations.js');
 
 const mutex = new Mutex();
 
@@ -13,10 +13,12 @@ async function getAttendance(data, o, chat) {
         let userName = data[o]["author"]["name"];
 
         // DB에서 유저 확인
-        const user = await getUserByName(userName);
+        let user = await getUserByName(userName);
         if (!user) {
-            await chat.send("등록된 계정이 없습니다. 닉네임을 변경하셨다면 관리자에게 문의해주세요");
-            return;
+            // 신규 유저 자동 등록
+            await createUser(userName);
+            user = await getUserByName(userName);
+            logger.info(`New user created: ${userName}`);
         }
 
         // 출석 체크 시도

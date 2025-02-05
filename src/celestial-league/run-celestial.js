@@ -19,6 +19,7 @@ const { givePoint, takePoint } = require('./give-take.js');
 const betPoint = require('./bet-point.js');
 const settleBet = require('./settle-bet.js');
 const logger = require('./logger.js');
+const getIlssak = require('./get-ilssak.js');
 let isBetting = false;
 
 async function runCelestial(data, o, chat) {
@@ -45,6 +46,7 @@ async function runCelestial(data, o, chat) {
 
     try {
         if (message.startsWith("!명령어")) { await getHint(data, o, chat); }
+        else if (message.startsWith("!일싹이")) { await getIlssak(data, o, chat); }
         else if (message.startsWith("!질문")) { await registerQuestion(data, o, chat); }
         else if (message.startsWith("!기록")) { await getRecord(data, o, chat); }
         else if (message.startsWith("!이번주")) { await getThisWeek(data, o, chat); }
