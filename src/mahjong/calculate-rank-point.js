@@ -68,7 +68,7 @@ async function calculateRankPoint(data, o, chat, streamerName) {
     const startCell = "A2";
     const endCell = "F5000";
     let spreadsheetID = "";
-    if (streamerName === "유키ㅡ") { spreadsheetID = process.env.YUKI_SPREADSHEET_ID; }
+    if (streamerName === "모찌유키 MochiYuki") { spreadsheetID = process.env.YUKI_SPREADSHEET_ID; }
     else if (streamerName === "금성경") { spreadsheetID = process.env.YUKI_SPREADSHEET_ID; }
     // else if (streamerName === "해모수보컬") { spreadsheetID = process.env.HMS_SPREADSHEET_ID; }
     // else if (streamerName === "병겜임") { spreadsheetID = process.env.BGI_SPREADSHEET_ID; }
@@ -87,85 +87,19 @@ async function calculateRankPoint(data, o, chat, streamerName) {
 
     await writeSheet(sheetName, startCell, endCell, rankPointData, spreadsheetID);
 
-    rankData = await readSheet(sheetName, "H2", "I5000", spreadsheetID);
+    let rankData = await readSheet(sheetName, "H2", "I5000", spreadsheetID);
 
-    // change the point to integer
-    players[0].point = parseInt(players[0].point);
-    players[1].point = parseInt(players[1].point);
-    players[2].point = parseInt(players[2].point);
-    players[3].point = parseInt(players[3].point);
-
-    // record first player's point
-    let playerIndex = -1;
-    for (let i = 0; i < rankData.length; i++) {
-        if (rankData[i][0] === players[0].name) {
-            playerIndex = i;
-            break;
+    // check if the username exists in the rankData, and if it does not, add it to the rankData
+    for (let i = 0; i < players.length; i++) {
+        if (rankData.find(row => row[0] === players[i].name)) {
+            continue;
         }
+        rankData.push([players[i].name, 0]);
     }
 
-    if (playerIndex === -1) {
-        rankData.push([players[0].name, players[0].point]);
-    }
-    else {
-        rankData[playerIndex][1] = (parseInt(rankData[playerIndex][1]) + parseInt(players[0].point)).toString();
-    }
-    await writeSheet(sheetName, "H2", "I5000", rankData, spreadsheetID);
-    rankData = await readSheet(sheetName, "H2", "I5000", spreadsheetID);
-
-    // record second player's point
-    playerIndex = -1;
     for (let i = 0; i < rankData.length; i++) {
-        if (rankData[i][0] === players[1].name) {
-            playerIndex = i;
-            break;
-        }
+        rankData[i][1] = "=SUMIF(C$2:C$5000, H" + (i + 2).toString() + ", F$2:F$5000)";
     }
-
-    if (playerIndex === -1) {
-        rankData.push([players[1].name, players[1].point]);
-    }
-    else {
-        rankData[playerIndex][1] = (parseInt(rankData[playerIndex][1]) + parseInt(players[1].point)).toString();
-    }
-    await writeSheet(sheetName, "H2", "I5000", rankData, spreadsheetID);
-    rankData = await readSheet(sheetName, "H2", "I5000", spreadsheetID);
-
-    // record third player's point
-    playerIndex = -1;
-    for (let i = 0; i < rankData.length; i++) {
-        if (rankData[i][0] === players[2].name) {
-            playerIndex = i;
-            break;
-        }
-    }
-    if (playerIndex === -1) {
-        rankData.push([players[2].name, players[2].point]);
-    }
-    else {
-        rankData[playerIndex][1] = (parseInt(rankData[playerIndex][1]) + parseInt(players[2].point)).toString();
-    }
-    await writeSheet(sheetName, "H2", "I5000", rankData, spreadsheetID);
-    rankData = await readSheet(sheetName, "H2", "I5000", spreadsheetID);
-
-    // record fourth player's point
-    playerIndex = -1;
-    for (let i = 0; i < rankData.length; i++) {
-        if (rankData[i][0] === players[3].name) {
-            playerIndex = i;
-            break;
-        }
-    }
-    if (playerIndex === -1) {
-        rankData.push([players[3].name, players[3].point]);
-    }
-    else {
-        rankData[playerIndex][1] = (parseInt(rankData[playerIndex][1]) + parseInt(players[3].point)).toString();
-    }
-    await writeSheet(sheetName, "H2", "I5000", rankData, spreadsheetID);
-    rankData = await readSheet(sheetName, "H2", "I5000", spreadsheetID);
-
-    rankData.sort((a, b) => b[1] - a[1]);
 
     await writeSheet(sheetName, "H2", "I5000", rankData, spreadsheetID);
 

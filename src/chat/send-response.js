@@ -1,6 +1,6 @@
 const readJson = require("../util/read-json.js")
 
-async function sendResponse(data, o, chat) {
+async function sendResponse(data, o, chat, isCapital=false) {
     let message = data[o].message;
 
     const terminology = await readJson("./data/terminology.json");
@@ -8,6 +8,7 @@ async function sendResponse(data, o, chat) {
     const schedule = await readJson("./data/schedule.json");
     const numbers = await readJson("./data/numbers.json");
     const urls = await readJson("./data/urls.json");
+    const capitalCommands = await readJson("./data/capital-commands.json");
 
     // 느낌표로 시작하는지 확인
     if (message.startsWith("!")) 
@@ -24,6 +25,9 @@ async function sendResponse(data, o, chat) {
         if (inputMessage in terminology) { await chat.send(terminology[inputMessage]); }
         else if (inputMessage in numbers) { await chat.send(numbers[inputMessage]); }
         else if (inputMessage in urls) { await chat.send(urls[inputMessage]); }
+        if (isCapital) {
+            if (inputMessage in capitalCommands) { await chat.send(capitalCommands[inputMessage]); }
+        }
         else { return; } 
     }
 }

@@ -6,6 +6,8 @@ async function checkAuthority(data, o, chat, streamerName) {
     let authority = fs.readFileSync('data/authority.json');
     authority = JSON.parse(authority);
 
+    console.log(authority);
+
     const streamerAuthority = authority[streamerName];
     if (streamerAuthority.includes(data[o].author.name)) { return true; } 
     else { return false; }

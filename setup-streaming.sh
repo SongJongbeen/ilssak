@@ -13,6 +13,7 @@ source ~/.bashrc
 pm2 start test-streaming-bgi.js --name streaming-bgi
 pm2 start test-streaming-hms.js --name streaming-hms
 pm2 start test-streaming-yuki.js --name streaming-yuki
+pm2 start test-streaming-capital.js --name streaming-capital
 
 # PM2 설정 저장 및 startup 설정
 pm2 save
@@ -22,6 +23,6 @@ pm2 startup
 pm2 restart streaming-bgi --cron "0 * * * *"
 pm2 restart streaming-hms --cron "0 * * * *"
 pm2 restart streaming-yuki --cron "0 * * * *"
-
+pm2 restart streaming-capital --cron "0 * * * *"
 # tmux 세션에 접속
-tmux attach -t streaming 
+tmux attach -t streaming

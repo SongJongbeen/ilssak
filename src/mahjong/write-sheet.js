@@ -19,7 +19,7 @@ async function writeSheet(sheetName, startCell, endCell, values, spreadsheetId) 
     const response = await sheets.spreadsheets.values.update({
       spreadsheetId,
       range: `${sheetName}!${startCell}:${endCell}`,
-      valueInputOption,
+      valueInputOption: 'USER_ENTERED',
       resource: {
         values: values
       }

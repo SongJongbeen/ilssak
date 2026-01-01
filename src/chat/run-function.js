@@ -23,13 +23,15 @@ const sakuraGacha = require('../mahjong/sakura-gacha.js');
 const bambooGacha = require('../mahjong/bamboo-gacha.js');
 const collabo = require('../mahjong/collabo.js');
 const askGPT = require('../util/ask-gpt.js');
+const organizeRanking = require('../mahjong/organize-ranking.js');
 const calculateRankPoint = require('../mahjong/calculate-rank-point.js');
 
 async function runFunction(data, o, chat, streamerName) {
     message = data[o].message;
 
     try {
-        if (message.startsWith("!패보")) { await registerPaipu(data, o, chat, streamerName); }
+        if (message.startsWith("!패보") && streamerName !== "모찌유키 MochiYuki") { await registerPaipu(data, o, chat, streamerName); }
+        else if (message.startsWith("!신청")) { await registerPaipu(data, o, chat, streamerName); }
         else if (message.startsWith("!질문")) { await registerQuestion(data, o, chat, streamerName); }
         else if (message.startsWith("!스케줄")) { await registerSchedule(data, o, chat, streamerName); }
         // else if (message.startsWith("!일정")) { await registerWeeklySchedule(data, o, chat, streamerName); }
@@ -53,6 +55,7 @@ async function runFunction(data, o, chat, streamerName) {
         else if (message.startsWith("!벚꽃의길")) { await sakuraGacha(chat); }
         else if (message.startsWith("!콜라보")) { await collabo(chat); }
         else if (message.startsWith("!죽림의길")) { await bambooGacha(chat); }
+        else if (message.startsWith("!기록정리")) { await organizeRanking(data, o, chat, streamerName); }
         else if (message.startsWith("!기록")) { await calculateRankPoint(data, o, chat, streamerName); }
         else { return; }
     }

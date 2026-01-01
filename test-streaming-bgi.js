@@ -64,7 +64,7 @@ async function test (streamerName) {
             }
 
             // if streamerName is "해모수보컬" or "유키"
-            if (streamerName === "해모수보컬" || streamerName === "유키ㅡ") {
+            if (streamerName === "해모수보컬" || streamerName === "모찌유키 MochiYuki") {
                 if (data[o].message.startsWith("!GPT")) { await askGPT(data, o, chat); }
                 else if (data[o].message.startsWith("!gpt")) { await askGPT(data, o, chat); }
             }

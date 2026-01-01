@@ -37,6 +37,8 @@ const buzzkChat = buzzk.chat;
 
 async function test (streamerName) {
 
+    streamerName = "모찌유키 MochiYuki";
+
     let isActive = true; //활성화 여부
 
     let chSearch = await buzzk.channel.search(streamerName); //채널 검색
@@ -121,7 +123,7 @@ async function test (streamerName) {
 // test("일급천재");
 // test("캐피탈호");
 // test("병겜임");
-test("유키ㅡ");
+test("모찌유키 MochiYuki");
 // test("해모수보컬");
 // test("금성경");
                              
